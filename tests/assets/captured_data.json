@@ -1,0 +1,25 @@
+{
+  "i": "issuer1",
+  "devices": [
+    {
+      "name": "device1",
+      "description": "desc1",
+      "_id": "f7027bf0-9e44-4168-8f62-bd25c61adeae",
+      "manufacturer": {
+        "name": "dsa",
+        "address": {
+          "city": "asd",
+          "is_nice": "false"
+        }
+      }
+    }
+  ],
+  "img": "EBoF5bgnlYLxf__l9siWgFgqDwQGGqlp46TEiqym1SJ4",
+  "select": "o1",
+  "selectmulti": ["o5"],
+  "list_text": ["asd"],
+  "list_text2": ["dsa", "asd"],
+  "list_text3": ["dsa", "asd"],
+  "radio3": "false",
+  "num": 2
+}
