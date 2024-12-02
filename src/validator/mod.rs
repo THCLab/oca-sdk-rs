@@ -5,7 +5,12 @@ use oca_bundle_semantics::state::{
     oca::{OCABox, OCABundle},
 };
 
-pub fn validate(oca: &OCABundle, data: &str) -> Result<Vec<String>, String> {
+pub enum DataValidationStatus {
+    Valid,
+    Invalid(Vec<String>)
+}
+
+pub fn validate(oca: &OCABundle, data: &str) -> Result<DataValidationStatus, String> {
     let mut errors = vec![];
 
     let oca_box = OCABox::from(oca.clone());
@@ -20,16 +25,20 @@ pub fn validate(oca: &OCABundle, data: &str) -> Result<Vec<String>, String> {
         return Err("Data is not an object".to_string());
     }
 
-    oca_box.attributes.values().for_each(|attr| {
+    for attr in oca_box.attributes.values() {
         let value = d.get(attr.name.clone());
-        let attribute_errors = validate_attribute(attr, value).unwrap();
+        let attribute_errors = validate_attribute(attr, value)?;
 
         if !attribute_errors.is_empty() {
             errors.extend(attribute_errors);
         }
-    });
+    }
 
-    Ok(errors)
+    if errors.is_empty() {
+        Ok(DataValidationStatus::Valid)
+    } else {
+        Ok(DataValidationStatus::Invalid(errors))
+    }
 }
 
 fn validate_attribute(

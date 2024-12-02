@@ -1,8 +1,10 @@
-use oca_sdk_rs::validator::validate;
+use oca_sdk_rs::{
+    load_oca,
+    validator::{validate, DataValidationStatus},
+    OCAValidator,
+};
 use std::fs;
 use std::path::Path;
-
-use oca_bundle_semantics::controller::load_oca;
 
 #[test]
 fn validate_captured_data() -> Result<(), Box<dyn std::error::Error>> {
@@ -15,8 +17,19 @@ fn validate_captured_data() -> Result<(), Box<dyn std::error::Error>> {
     let captured_data_str = fs::read_to_string(captured_data_path)?;
 
     let oca = load_oca(&mut oca_bundle_str.as_bytes()).unwrap();
-    let result = validate(&oca, &captured_data_str).unwrap();
-    assert_eq!(result.len(), 3);
+
+    let oca_validator = OCAValidator::new();
+    let oca_validation_result = oca_validator.validate(&oca);
+    assert!(matches!(oca_validation_result, Ok(())));
+
+    let data_validation_result = validate(&oca, &captured_data_str).unwrap();
+    assert!(matches!(
+        data_validation_result,
+        DataValidationStatus::Invalid(_)
+    ));
+    if let DataValidationStatus::Invalid(errors) = data_validation_result {
+        assert_eq!(errors.len(), 3);
+    }
 
     Ok(())
 }
