@@ -1,7 +1,7 @@
 use oca_sdk_rs::{
-    load_oca,
     validator::{validate, DataValidationStatus},
-    OCAValidator,
+    load_oca, OCAValidator,
+    WithInfo,
 };
 use std::fs;
 use std::path::Path;
@@ -17,6 +17,16 @@ fn validate_captured_data() -> Result<(), Box<dyn std::error::Error>> {
     let captured_data_str = fs::read_to_string(captured_data_path)?;
 
     let oca = load_oca(&mut oca_bundle_str.as_bytes()).unwrap();
+
+    println!("{:?}", oca.info().meta.unwrap());
+    println!(
+        "{:?}",
+        oca.info()
+            .attributes
+            .keys()
+            .map(|name| { name.to_string() })
+            .collect::<Vec<String>>()
+    );
 
     let oca_validator = OCAValidator::new();
     let oca_validation_result = oca_validator.validate(&oca);
