@@ -4,7 +4,7 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-oca-ast-semantics = { version = "0.6.0" }
-oca-bundle-semantics = { version = "0.6.0", features = ["format_overlay"] }
+oca-ast-semantics = { version = "0.6.1" }
+oca-bundle-semantics = { version = "0.6.1", features = ["format_overlay"] }
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"

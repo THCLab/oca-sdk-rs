@@ -7,10 +7,13 @@ use oca_bundle_semantics::state::{
 
 pub enum DataValidationStatus {
     Valid,
-    Invalid(Vec<String>)
+    Invalid(Vec<String>),
 }
 
-pub fn validate(oca: &OCABundle, data: &str) -> Result<DataValidationStatus, String> {
+pub fn validate(
+    oca: &OCABundle,
+    data: &str,
+) -> Result<DataValidationStatus, String> {
     let mut errors = vec![];
 
     let oca_box = OCABox::from(oca.clone());

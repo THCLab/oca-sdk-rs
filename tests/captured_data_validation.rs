@@ -1,7 +1,6 @@
 use oca_sdk_rs::{
-    validator::{validate, DataValidationStatus},
-    load_oca, OCAValidator,
-    WithInfo,
+    data_validator::{validate as validate_data, DataValidationStatus},
+    load_oca, validate_semantics, SemanticValidationStatus, WithInfo,
 };
 use std::fs;
 use std::path::Path;
@@ -28,16 +27,19 @@ fn validate_captured_data() -> Result<(), Box<dyn std::error::Error>> {
             .collect::<Vec<String>>()
     );
 
-    let oca_validator = OCAValidator::new();
-    let oca_validation_result = oca_validator.validate(&oca);
-    assert!(matches!(oca_validation_result, Ok(())));
-
-    let data_validation_result = validate(&oca, &captured_data_str).unwrap();
+    let semantics_validation_status = validate_semantics(&oca).unwrap();
     assert!(matches!(
-        data_validation_result,
+        semantics_validation_status,
+        SemanticValidationStatus::Valid
+    ));
+
+    let data_validation_status =
+        validate_data(&oca, &captured_data_str).unwrap();
+    assert!(matches!(
+        data_validation_status,
         DataValidationStatus::Invalid(_)
     ));
-    if let DataValidationStatus::Invalid(errors) = data_validation_result {
+    if let DataValidationStatus::Invalid(errors) = data_validation_status {
         assert_eq!(errors.len(), 3);
     }
 
