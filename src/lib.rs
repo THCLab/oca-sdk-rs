@@ -11,7 +11,10 @@ pub use oca_bundle_semantics::{
         },
     },
 };
-pub use oca_rs::facade::bundle::{load_oca, Bundle, BundleElement};
+pub use oca_rs::facade::{
+    build::build_from_ocafile,
+    bundle::{load_oca, Bundle, BundleElement},
+};
 use std::collections::HashMap;
 pub use transformation_file::state::Transformation;
 

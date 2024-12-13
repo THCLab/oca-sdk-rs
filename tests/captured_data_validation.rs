@@ -1,10 +1,29 @@
 use oca_sdk_rs::{
+    build_from_ocafile,
     data_validator::{validate as validate_data, DataValidationStatus},
     load_oca, load_oca_semantics, validate_semantics, BundleElement,
     SemanticValidationStatus, WithInfo,
 };
 use std::fs;
 use std::path::Path;
+
+#[test]
+fn building_from_ocafile() -> Result<(), Box<dyn std::error::Error>> {
+    let ocafile_path = Path::new("tests/assets/entrance_credential.ocafile");
+    assert!(ocafile_path.exists(), "Asset file not found!");
+    let ocafile_str = fs::read_to_string(ocafile_path)?;
+
+    let bundle_element = build_from_ocafile(ocafile_str).unwrap();
+    assert!(matches!(bundle_element, BundleElement::Structural(_)));
+    if let BundleElement::Structural(structural_bundle) = bundle_element {
+        assert_eq!(
+            structural_bundle.said.unwrap().to_string(),
+            "EKHBds6myKVIsQuT7Zr23M8Xk_gwq-2SaDRUprvqOXxa"
+        );
+    }
+
+    Ok(())
+}
 
 #[test]
 fn validate_oca_bundle_semantics() -> Result<(), Box<dyn std::error::Error>> {
