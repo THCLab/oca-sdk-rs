@@ -1,7 +1,7 @@
 use oca_sdk_rs::{
     data_validator::{validate as validate_data, DataValidationStatus},
-    load_oca, load_oca_semantics, validate_semantics, SemanticValidationStatus,
-    WithInfo,
+    load_oca, load_oca_semantics, validate_semantics, BundleElement,
+    SemanticValidationStatus, WithInfo,
 };
 use std::fs;
 use std::path::Path;
@@ -13,6 +13,12 @@ fn validate_oca_bundle_semantics() -> Result<(), Box<dyn std::error::Error>> {
     let oca_bundle_str = fs::read_to_string(oca_bundle_path)?;
 
     let oca_bundle = load_oca(&mut oca_bundle_str.as_bytes()).unwrap();
+
+    let bundle_info = oca_bundle.info();
+    println!("{:?}", bundle_info.meta);
+    println!("{:?}", bundle_info.attribute("name"));
+    println!("{:?}", bundle_info.links);
+
     let structural_bundle = oca_bundle.structural.unwrap();
     let semantics_validation_status =
         validate_semantics(&structural_bundle).unwrap();
@@ -38,16 +44,15 @@ fn validate_captured_data() -> Result<(), Box<dyn std::error::Error>> {
     let structural_bundle =
         load_oca_semantics(&mut structural_bundle_str.as_bytes()).unwrap();
 
-    println!("{:?}", structural_bundle.info().meta.unwrap());
-    println!(
-        "{:?}",
-        structural_bundle
-            .info()
-            .attributes
-            .keys()
-            .map(|name| { name.to_string() })
-            .collect::<Vec<String>>()
-    );
+    // println!(
+    //     "{:?}",
+    //     structural_bundle
+    //         .info()
+    //         .attributes
+    //         .keys()
+    //         .map(|name| { name.to_string() })
+    //         .collect::<Vec<String>>()
+    // );
 
     let semantics_validation_status =
         validate_semantics(&structural_bundle).unwrap();
