@@ -1,0 +1,64 @@
+name: CI
+
+permissions:
+  contents: write
+
+on:
+  push:
+    branches:
+      - "**" # Trigger on every branch push, excluding tags
+    tags:
+      - v[0-9]+.* # Trigger for tag pushes
+
+jobs:
+  # Job for running tests
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Rust
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+          override: true
+
+      - name: Run tests
+        run: cargo test --all
+
+  create-release:
+    if: startsWith(github.ref, 'refs/tags/') # Run only for tags
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - uses: actions/checkout@v4
+      - uses: taiki-e/create-gh-release-action@v1
+        with:
+          changelog: CHANGELOG.md
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+  upload-assets:
+    if: startsWith(github.ref, 'refs/tags/') # Run only for tags
+    needs: create-release
+    strategy:
+      matrix:
+        include:
+          - os: ubuntu-latest
+            archive-suffix: "ubuntu-latest"
+          - os: ubuntu-20.04
+            archive-suffix: "ubuntu-20.04"
+          - os: macos-latest
+            archive-suffix: ""
+          - os: windows-latest
+            archive-suffix: ""
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: taiki-e/upload-rust-binary-action@v1
+        with:
+          archive: $bin-$target${{ matrix.archive-suffix }}
+          bin: dkms
+          tar: unix
+          zip: windows
+          token: ${{ secrets.GITHUB_TOKEN }}
