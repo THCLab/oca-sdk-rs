@@ -1,3 +1,13 @@
+//! # OCA SDK
+//!
+//! Compact yet powerful SDK for working with OCA bundles.
+//!
+//! # Features
+//!
+//! - Create OCA Bundle from OCAFile.
+//! - Validate OCA Bundle semantics.
+//! - Validate data against OCA Bundle.
+//! - Traverse through OCA Bundle attributes.
 pub mod data_validator;
 pub use oca_ast_semantics::ast::NestedAttrType;
 
