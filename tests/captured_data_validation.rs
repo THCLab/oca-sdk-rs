@@ -1,15 +1,15 @@
 use oca_sdk_rs::{
     build_from_ocafile,
-    data_validator::{validate as validate_data, DataValidationStatus},
-    load_oca, load_oca_semantics, validate_semantics, BundleElement,
-    SemanticValidationStatus, WithInfo,
+    data_validator::{validate_data, DataValidationStatus},
+    load_oca, load_oca_semantics, validate_semantics, BundleElement, SemanticValidationStatus,
+    WithInfo,
 };
 use std::fs;
 use std::path::Path;
 
 #[test]
 fn building_from_ocafile() -> Result<(), Box<dyn std::error::Error>> {
-    let ocafile_path = Path::new("tests/assets/entrance_credential.ocafile");
+    let ocafile_path = Path::new("tests/assets/semantics/entrance_credential.ocafile");
     assert!(ocafile_path.exists(), "Asset file not found!");
     let ocafile_str = fs::read_to_string(ocafile_path)?;
 
@@ -27,7 +27,7 @@ fn building_from_ocafile() -> Result<(), Box<dyn std::error::Error>> {
 
 #[test]
 fn validate_oca_bundle_semantics() -> Result<(), Box<dyn std::error::Error>> {
-    let oca_bundle_path = Path::new("tests/assets/oca_bundle.json");
+    let oca_bundle_path = Path::new("tests/assets/semantics/oca_bundle.json");
     assert!(oca_bundle_path.exists(), "Asset file not found!");
     let oca_bundle_str = fs::read_to_string(oca_bundle_path)?;
 
@@ -39,8 +39,7 @@ fn validate_oca_bundle_semantics() -> Result<(), Box<dyn std::error::Error>> {
     println!("{:?}", bundle_info.links);
 
     let structural_bundle = oca_bundle.structural.unwrap();
-    let semantics_validation_status =
-        validate_semantics(&structural_bundle).unwrap();
+    let semantics_validation_status = validate_semantics(&structural_bundle).unwrap();
     assert!(matches!(
         semantics_validation_status,
         SemanticValidationStatus::Valid
@@ -51,37 +50,24 @@ fn validate_oca_bundle_semantics() -> Result<(), Box<dyn std::error::Error>> {
 
 #[test]
 fn validate_captured_data() -> Result<(), Box<dyn std::error::Error>> {
-    let captured_data_path = Path::new("tests/assets/captured_data.json");
+    let captured_data_path = Path::new("tests/assets/data/nested.json");
     assert!(captured_data_path.exists(), "Asset file not found!");
-    let captured_data_str = fs::read_to_string(captured_data_path)?;
+    let data_str = fs::read_to_string(captured_data_path)?;
+    let data = serde_json::from_str(&data_str)?;
 
-    let structural_bundle_path =
-        Path::new("tests/assets/structural_bundle.json");
+    let structural_bundle_path = Path::new("tests/assets/semantics/structural_bundle.json");
     assert!(structural_bundle_path.exists(), "Asset file not found!");
     let structural_bundle_str = fs::read_to_string(structural_bundle_path)?;
 
-    let structural_bundle =
-        load_oca_semantics(&mut structural_bundle_str.as_bytes()).unwrap();
+    let structural_bundle = load_oca_semantics(&mut structural_bundle_str.as_bytes()).unwrap();
 
-    // println!(
-    //     "{:?}",
-    //     structural_bundle
-    //         .info()
-    //         .attributes
-    //         .keys()
-    //         .map(|name| { name.to_string() })
-    //         .collect::<Vec<String>>()
-    // );
-
-    let semantics_validation_status =
-        validate_semantics(&structural_bundle).unwrap();
+    let semantics_validation_status = validate_semantics(&structural_bundle).unwrap();
     assert!(matches!(
         semantics_validation_status,
         SemanticValidationStatus::Valid
     ));
 
-    let data_validation_status =
-        validate_data(&structural_bundle, &captured_data_str).unwrap();
+    let data_validation_status = validate_data(&structural_bundle, &data).unwrap();
     assert!(matches!(
         data_validation_status,
         DataValidationStatus::Invalid(_)

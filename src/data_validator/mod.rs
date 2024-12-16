@@ -4,32 +4,55 @@ use oca_bundle_semantics::state::{
     entry_codes::EntryCodes,
     oca::{OCABox, OCABundle},
 };
+use serde_json::Value;
 
+/// Represents the validation status of the data.
+///
+/// This enum is used to indicate whether the provided data is valid
+/// or contains validation errors.
+///
+/// # Variants
+/// * `Valid` - Indicates that the data is valid and meets all validation criteria.
+/// * `Invalid(Vec<String>)` - Indicates that the data is invalid. Contains a vector
+///   of error messages describing the validation issues.
 pub enum DataValidationStatus {
     Valid,
     Invalid(Vec<String>),
 }
 
-pub fn validate(
-    oca: &OCABundle,
-    data: &str,
-) -> Result<DataValidationStatus, String> {
+/// Validates the provided data against the schema defined in the `OCABundle`.
+///
+/// This function checks if the structure and attributes of the input `data` conform
+/// to the semantics specified in the `OCABundle`. It performs validations
+/// for each attribute and aggregates any errors found.
+///
+/// # Arguments
+/// * `oca` - A reference to an `OCABundle` that contains the schema for validation.
+/// * `data` - A reference to a `serde_json::Value` representing the data to be validated.
+///   The `data` must be a JSON object.
+///
+/// # Returns
+/// * `Ok(DataValidationStatus)` - Indicates whether the data is valid or invalid,
+///   along with any associated error messages.
+/// * `Err(String)` - Indicates that an error occurred during validation, such as
+///   failure to parse the input data.
+///
+/// # Errors
+/// * Returns `Err` if the provided `data` cannot be parsed as a JSON object.
+/// * Returns `Ok(DataValidationStatus::Invalid)` if validation fails, with a
+///   vector of detailed error messages.
+///
+pub fn validate_data(oca: &OCABundle, data: &Value) -> Result<DataValidationStatus, String> {
     let mut errors = vec![];
 
     let oca_box = OCABox::from(oca.clone());
-    let d: serde_json::Value = match serde_json::from_str(data) {
-        Ok(d) => d,
-        Err(e) => {
-            return Err(format!("Failed to parse data: {}", e));
-        }
-    };
 
-    if !d.is_object() {
+    if !data.is_object() {
         return Err("Data is not an object".to_string());
     }
 
     for attr in oca_box.attributes.values() {
-        let value = d.get(attr.name.clone());
+        let value = data.get(attr.name.clone());
         let attribute_errors = validate_attribute(attr, value)?;
 
         if !attribute_errors.is_empty() {
