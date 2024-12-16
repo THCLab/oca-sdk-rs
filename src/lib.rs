@@ -1,14 +1,54 @@
 pub mod data_validator;
 pub use oca_ast_semantics::ast::NestedAttrType;
+
+/// Performs semantic validation of an `OCABundle` and returns a status
+/// indicating whether the validation succeeded or failed, along with any associated errors.
+///
+/// Semantics validation ensures Bundle integrity, that is, that the Bundle identifier under `d`
+/// attribute matches the hash of the Bundle content.
+///
+/// # Arguments
+/// * `oca_bundle` - A reference to an `OCABundle` instance to be validated.
+///   The `OCABundle` contains the schema and data to be checked for semantic correctness.
+///
+/// # Returns
+/// * `Ok(SemanticValidationStatus::Valid)` - If the `OCABundle` passes all semantic validation checks.
+/// * `Ok(SemanticValidationStatus::Invalid(errors))` - If validation errors are found, with a vector of error messages.
+/// * `Err(String)` - If a critical error occurs during validation.
+///
+/// # Errors
+/// * Returns `Err` with a string message if the validation process encounters unexpected errors.
+///
+/// # Examples
+/// ```
+/// use std::fs;
+/// use std::path::Path;
+/// use oca_sdk_rs::{load_oca_semantics, validate_semantics, SemanticValidationStatus};
+///
+/// let structural_bundle_path = Path::new("tests/assets/semantics/structural_bundle.json");
+/// let structural_bundle_str = fs::read_to_string(structural_bundle_path).expect("Failed to read the file");
+///
+/// let structural_bundle = load_oca_semantics(&mut structural_bundle_str.as_bytes()).unwrap();
+///
+/// let semantics_validation_status = validate_semantics(&structural_bundle).unwrap();
+///
+/// match semantics_validation_status {
+///     SemanticValidationStatus::Valid => println!("The structural bundle is valid!"),
+///     SemanticValidationStatus::Invalid(errors) => {
+///         println!("Validation errors:");
+///         for error in errors {
+///             println!("  - {}", error);
+///         }
+///     }
+/// }
+/// ```
+pub use oca_bundle_semantics::state::validator::validate as validate_semantics;
 pub use oca_bundle_semantics::{
     controller::load_oca as load_oca_semantics,
     state::{
         attribute::{Attribute, AttributeType},
         oca::{OCABox as StructuralBox, OCABundle as StructuralBundle},
-        validator::{
-            validate as validate_semantics, SemanticValidationStatus,
-            Validator as OCAValidator,
-        },
+        validator::{SemanticValidationStatus, Validator as OCAValidator},
     },
 };
 pub use oca_rs::facade::{
@@ -57,9 +97,7 @@ impl BundleInfo {
         }
     }
 
-    pub fn attributes(
-        &self,
-    ) -> std::collections::hash_map::Values<'_, String, Attribute> {
+    pub fn attributes(&self) -> std::collections::hash_map::Values<'_, String, Attribute> {
         self.attributes.values()
     }
 
