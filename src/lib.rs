@@ -63,8 +63,9 @@ pub use oca_bundle_semantics::{
 };
 pub use oca_rs::facade::{
     build::build_from_ocafile,
-    bundle::{load_oca, Bundle, BundleElement},
+    bundle::load_oca,
 };
+use oca_rs::facade::bundle::Bundle;
 use std::collections::HashMap;
 pub use transformation_file::state::Transformation;
 

@@ -1,7 +1,7 @@
 use oca_sdk_rs::{
     build_from_ocafile,
     data_validator::{validate_data, DataValidationStatus},
-    load_oca, load_oca_semantics, validate_semantics, BundleElement, SemanticValidationStatus,
+    load_oca, load_oca_semantics, validate_semantics, SemanticValidationStatus,
     WithInfo,
 };
 use std::fs;
@@ -13,14 +13,11 @@ fn building_from_ocafile() -> Result<(), Box<dyn std::error::Error>> {
     assert!(ocafile_path.exists(), "Asset file not found!");
     let ocafile_str = fs::read_to_string(ocafile_path)?;
 
-    let bundle_element = build_from_ocafile(ocafile_str).unwrap();
-    assert!(matches!(bundle_element, BundleElement::Structural(_)));
-    if let BundleElement::Structural(structural_bundle) = bundle_element {
-        assert_eq!(
-            structural_bundle.said.unwrap().to_string(),
-            "EKHBds6myKVIsQuT7Zr23M8Xk_gwq-2SaDRUprvqOXxa"
-        );
-    }
+    let oca_bundle = build_from_ocafile(ocafile_str).unwrap();
+    assert_eq!(
+        oca_bundle.said.unwrap().to_string(),
+        "EKHBds6myKVIsQuT7Zr23M8Xk_gwq-2SaDRUprvqOXxa"
+    );
 
     Ok(())
 }
