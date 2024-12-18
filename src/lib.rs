@@ -57,14 +57,30 @@ pub use oca_bundle_semantics::{
     controller::load_oca as load,
     state::{
         attribute::{Attribute, AttributeType},
-        oca::{OCABox as StructuralBox, OCABundle as StructuralBundle},
+        oca::{OCABox, OCABundle},
         validator::{SemanticValidationStatus, Validator as OCAValidator},
     },
 };
 pub use oca_rs::facade::build::build_from_ocafile;
-use oca_rs::facade::bundle::Bundle;
+use oca_rs::{
+    facade::bundle::Bundle, EncodeBundle, HashFunctionCode,
+    SerializationFormats,
+};
 use std::collections::HashMap;
 pub use transformation_file::state::Transformation;
+
+pub trait ToJSON {
+    fn get_json_bundle(&self) -> String;
+}
+
+impl ToJSON for OCABundle {
+    fn get_json_bundle(&self) -> String {
+        let code = HashFunctionCode::Blake3_256;
+        let format = SerializationFormats::JSON;
+
+        String::from_utf8(self.encode(&code, &format).unwrap()).unwrap()
+    }
+}
 
 pub trait WithInfo {
     fn info(&self) -> BundleInfo;
@@ -88,7 +104,7 @@ impl BundleInfo {
         let mut attributes = HashMap::new();
         let mut meta = HashMap::new();
         if let Some(structural_bundle) = bundle.structural {
-            let structural_box = StructuralBox::from(structural_bundle.clone());
+            let structural_box = OCABox::from(structural_bundle.clone());
             if let Some(m) = structural_box.meta {
                 m.iter().for_each(|(k, v)| {
                     meta.insert(k.to_639_3().to_string(), v.to_owned());

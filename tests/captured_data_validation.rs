@@ -1,7 +1,7 @@
 use oca_sdk_rs::{
     build_from_ocafile,
     data_validator::{validate_data, DataValidationStatus},
-    load, validate_semantics, SemanticValidationStatus,
+    load, validate_semantics, SemanticValidationStatus, ToJSON,
 };
 use std::fs;
 use std::path::Path;
@@ -14,10 +14,11 @@ fn building_from_ocafile() -> Result<(), Box<dyn std::error::Error>> {
 
     let oca_bundle = build_from_ocafile(ocafile_str).unwrap();
     assert_eq!(
-        oca_bundle.said.unwrap().to_string(),
+        oca_bundle.said.clone().unwrap().to_string(),
         "EKHBds6myKVIsQuT7Zr23M8Xk_gwq-2SaDRUprvqOXxa"
     );
 
+    println!("{}", oca_bundle.get_json_bundle());
 
     Ok(())
 }
