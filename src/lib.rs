@@ -33,12 +33,12 @@ pub use oca_ast_semantics::ast::NestedAttrType;
 /// ```
 /// use std::fs;
 /// use std::path::Path;
-/// use oca_sdk_rs::{load_oca_semantics, validate_semantics, SemanticValidationStatus};
+/// use oca_sdk_rs::{load, validate_semantics, SemanticValidationStatus};
 ///
 /// let structural_bundle_path = Path::new("tests/assets/semantics/structural_bundle.json");
 /// let structural_bundle_str = fs::read_to_string(structural_bundle_path).expect("Failed to read the file");
 ///
-/// let structural_bundle = load_oca_semantics(&mut structural_bundle_str.as_bytes()).unwrap();
+/// let structural_bundle = load(&mut structural_bundle_str.as_bytes()).unwrap();
 ///
 /// let semantics_validation_status = validate_semantics(&structural_bundle).unwrap();
 ///
@@ -54,17 +54,14 @@ pub use oca_ast_semantics::ast::NestedAttrType;
 /// ```
 pub use oca_bundle_semantics::state::validator::validate as validate_semantics;
 pub use oca_bundle_semantics::{
-    controller::load_oca as load_oca_semantics,
+    controller::load_oca as load,
     state::{
         attribute::{Attribute, AttributeType},
         oca::{OCABox as StructuralBox, OCABundle as StructuralBundle},
         validator::{SemanticValidationStatus, Validator as OCAValidator},
     },
 };
-pub use oca_rs::facade::{
-    build::build_from_ocafile,
-    bundle::load_oca,
-};
+pub use oca_rs::facade::build::build_from_ocafile;
 use oca_rs::facade::bundle::Bundle;
 use std::collections::HashMap;
 pub use transformation_file::state::Transformation;
