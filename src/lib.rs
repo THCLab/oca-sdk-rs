@@ -121,7 +121,7 @@ impl BundleInfo {
         }
     }
 
-    pub fn attributes(&self) -> std::collections::hash_map::Values<'_, String, Attribute> {
+    pub fn attributes(&self) -> impl Iterator<Item = &Attribute>{
         self.attributes.values()
     }
 
