@@ -57,11 +57,11 @@ pub use oca_bundle_semantics::{
     controller::load_oca as load,
     state::{
         attribute::{Attribute, AttributeType},
-        oca::{OCABox, OCABundle},
+        oca::{OCABox, OCABundle, overlay},
         validator::{SemanticValidationStatus, Validator as OCAValidator},
     },
 };
-pub use oca_rs::facade::build::build_from_ocafile;
+pub use oca_rs::facade::build::{build_from_ocafile, parse_oca_bundle_to_ocafile};
 use oca_rs::{
     facade::bundle::Bundle, EncodeBundle, HashFunctionCode,
     SerializationFormats,
