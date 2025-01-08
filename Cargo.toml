@@ -2,6 +2,9 @@
 name = "oca-sdk-rs"
 version = "0.1.0"
 edition = "2021"
+license = "EUPL-1.2"
+readme = "README.md"
+description = "Comprehensive SDK for OCA Bundle management and integration"
 
 [dependencies]
 oca-rs = { version = "0.6.5" }
