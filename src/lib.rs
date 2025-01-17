@@ -9,7 +9,7 @@
 //! - Validate data against OCA Bundle.
 //! - Traverse through OCA Bundle attributes.
 pub mod data_validator;
-pub use oca_ast_semantics::ast::NestedAttrType;
+pub use oca_ast_semantics::ast::{AttributeType, NestedAttrType, OverlayType, RefValue, recursive_attributes::NestedAttrTypeFrame};
 
 /// Performs semantic validation of an `OCABundle` and returns a status
 /// indicating whether the validation succeeded or failed, along with any associated errors.
@@ -56,12 +56,12 @@ pub use oca_bundle_semantics::state::validator::validate as validate_semantics;
 pub use oca_bundle_semantics::{
     controller::load_oca as load,
     state::{
-        attribute::{Attribute, AttributeType},
+        attribute::Attribute,
         oca::{OCABox, OCABundle, overlay},
         validator::{SemanticValidationStatus, Validator as OCAValidator},
     },
 };
-pub use oca_rs::facade::build::{build_from_ocafile, parse_oca_bundle_to_ocafile};
+pub use oca_rs::facade::{Facade, build::{build_from_ocafile, parse_oca_bundle_to_ocafile}};
 use oca_rs::{
     facade::bundle::Bundle, EncodeBundle, HashFunctionCode,
     SerializationFormats,
