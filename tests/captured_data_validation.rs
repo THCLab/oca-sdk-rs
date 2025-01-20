@@ -21,6 +21,8 @@ fn building_from_ocafile() -> Result<(), Box<dyn std::error::Error>> {
     oca_bundle.info().attributes().for_each(|attr| {
         println!("{:?}", attr);
     });
+    println!("links: {:?}", oca_bundle.info().links);
+    println!("framings: {:?}", oca_bundle.info().framings);
     println!("{}", oca_bundle.get_json_bundle());
 
     Ok(())

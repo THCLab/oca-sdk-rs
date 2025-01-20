@@ -100,7 +100,7 @@ pub struct OCABundleInfo {
     attributes: HashMap<String, Attribute>,
     pub meta: HashMap<String, HashMap<String, String>>,
     pub links: Vec<overlay::Link>,
-    pub framing: Vec<overlay::AttributeFraming>,
+    pub framings: Vec<overlay::AttributeFraming>,
 }
 
 impl OCABundleInfo {
@@ -113,11 +113,37 @@ impl OCABundleInfo {
             })
         }
 
+        let mut overlays = bundle.overlays.clone();
+        let links: Vec<overlay::Link> = overlays
+            .iter_mut()
+            .filter(|o| o.as_any().downcast_ref::<overlay::Link>().is_some())
+            .map(|o| {
+                o.as_any()
+                    .downcast_ref::<overlay::Link>()
+                    .unwrap()
+                    .to_owned()
+            })
+            .collect();
+        let framings: Vec<overlay::AttributeFraming> = overlays
+            .iter_mut()
+            .filter(|o| {
+                o.as_any()
+                    .downcast_ref::<overlay::AttributeFraming>()
+                    .is_some()
+            })
+            .map(|o| {
+                o.as_any()
+                    .downcast_ref::<overlay::AttributeFraming>()
+                    .unwrap()
+                    .to_owned()
+            })
+            .collect();
+
         Self {
             attributes: oca_box.attributes,
             meta,
-            links: vec![],
-            framing: vec![],
+            links,
+            framings,
         }
     }
 
