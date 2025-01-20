@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.3] - 2025-01-20
+
+### 🐛 Bug Fixes
+
+- Support multiple OCABundle instances in OCABundleInfo cache logic
+
+### ⚙️ Miscellaneous Tasks
+
+- Add initial changelog file
+
 ## [0.1.2] - 2025-01-20
 
 ### 🚀 Features
@@ -13,6 +23,7 @@ All notable changes to this project will be documented in this file.
 
 - Update CI workflow to publish on crates.io
 - Add configuration for release management
+- Release 0.1.2 version
 
 ## [0.1.1] - 2025-01-17
 

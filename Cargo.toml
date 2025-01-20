@@ -1,6 +1,6 @@
 [package]
 name = "oca-sdk-rs"
-version = "0.1.2"
+version = "0.1.3"
 edition = "2021"
 license = "EUPL-1.2"
 readme = "README.md"
