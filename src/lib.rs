@@ -9,7 +9,10 @@
 //! - Validate data against OCA Bundle.
 //! - Traverse through OCA Bundle attributes.
 pub mod data_validator;
-pub use oca_ast_semantics::ast::{AttributeType, NestedAttrType, OverlayType, RefValue, recursive_attributes::NestedAttrTypeFrame};
+pub use oca_ast_semantics::ast::{
+    recursive_attributes::NestedAttrTypeFrame, AttributeType, NestedAttrType,
+    OverlayType, RefValue,
+};
 
 /// Performs semantic validation of an `OCABundle` and returns a status
 /// indicating whether the validation succeeded or failed, along with any associated errors.
@@ -57,17 +60,17 @@ pub use oca_bundle_semantics::{
     controller::load_oca as load,
     state::{
         attribute::Attribute,
-        oca::{OCABox, OCABundle, overlay},
+        oca::{overlay, OCABox, OCABundle},
         validator::{SemanticValidationStatus, Validator as OCAValidator},
     },
 };
-pub use oca_rs::facade::{Facade, build::{build_from_ocafile, parse_oca_bundle_to_ocafile}};
-use oca_rs::{
-    facade::bundle::Bundle, EncodeBundle, HashFunctionCode,
-    SerializationFormats,
+pub use oca_rs::facade::{
+    build::{build_from_ocafile, parse_oca_bundle_to_ocafile},
+    Facade,
 };
+use oca_rs::{EncodeBundle, HashFunctionCode, SerializationFormats};
 use std::collections::HashMap;
-pub use transformation_file::state::Transformation;
+use std::sync::OnceLock;
 
 pub trait ToJSON {
     fn get_json_bundle(&self) -> String;
@@ -83,45 +86,42 @@ impl ToJSON for OCABundle {
 }
 
 pub trait WithInfo {
-    fn info(&self) -> BundleInfo;
+    fn info(&self) -> &OCABundleInfo;
 }
 
-impl WithInfo for Bundle {
-    fn info(&self) -> BundleInfo {
-        BundleInfo::new(self.clone())
+impl WithInfo for OCABundle {
+    fn info(&self) -> &OCABundleInfo {
+        static CACHE: OnceLock<OCABundleInfo> = OnceLock::new();
+        CACHE.get_or_init(|| OCABundleInfo::new(self))
     }
 }
 
-pub struct BundleInfo {
-    pub attributes: HashMap<String, Attribute>,
+pub struct OCABundleInfo {
+    attributes: HashMap<String, Attribute>,
     pub meta: HashMap<String, HashMap<String, String>>,
-    pub links: Vec<Transformation>,
-    pub framing: Vec<String>,
+    pub links: Vec<overlay::Link>,
+    pub framing: Vec<overlay::AttributeFraming>,
 }
 
-impl BundleInfo {
-    pub fn new(bundle: Bundle) -> Self {
-        let mut attributes = HashMap::new();
+impl OCABundleInfo {
+    pub fn new(bundle: &OCABundle) -> Self {
         let mut meta = HashMap::new();
-        if let Some(structural_bundle) = bundle.structural {
-            let structural_box = OCABox::from(structural_bundle.clone());
-            if let Some(m) = structural_box.meta {
-                m.iter().for_each(|(k, v)| {
-                    meta.insert(k.to_639_3().to_string(), v.to_owned());
-                })
-            }
-            attributes = structural_box.attributes;
+        let oca_box = OCABox::from(bundle.clone());
+        if let Some(m) = oca_box.meta {
+            m.iter().for_each(|(k, v)| {
+                meta.insert(k.to_639_3().to_string(), v.to_owned());
+            })
         }
 
         Self {
-            attributes,
+            attributes: oca_box.attributes,
             meta,
-            links: bundle.transformations,
+            links: vec![],
             framing: vec![],
         }
     }
 
-    pub fn attributes(&self) -> impl Iterator<Item = &Attribute>{
+    pub fn attributes(&self) -> impl Iterator<Item = &Attribute> {
         self.attributes.values()
     }
 
