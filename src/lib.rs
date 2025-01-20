@@ -70,7 +70,7 @@ pub use oca_rs::facade::{
 };
 use oca_rs::{EncodeBundle, HashFunctionCode, SerializationFormats};
 use std::collections::HashMap;
-use std::sync::OnceLock;
+use std::sync::{Arc, Mutex, Weak};
 
 pub trait ToJSON {
     fn get_json_bundle(&self) -> String;
@@ -85,14 +85,27 @@ impl ToJSON for OCABundle {
     }
 }
 
+lazy_static::lazy_static! {
+    static ref INFO_CACHE: Mutex<HashMap<usize, Weak<OCABundleInfo>>> = Mutex::new(HashMap::new());
+}
+
 pub trait WithInfo {
-    fn info(&self) -> &OCABundleInfo;
+    fn info(&self) -> Arc<OCABundleInfo>;
 }
 
 impl WithInfo for OCABundle {
-    fn info(&self) -> &OCABundleInfo {
-        static CACHE: OnceLock<OCABundleInfo> = OnceLock::new();
-        CACHE.get_or_init(|| OCABundleInfo::new(self))
+    fn info(&self) -> Arc<OCABundleInfo> {
+        let key = self as *const OCABundle as usize;
+        let mut cache = INFO_CACHE.lock().unwrap();
+        if let Some(weak_info) = cache.get(&key) {
+            if let Some(info) = weak_info.upgrade() {
+                return info;
+            }
+        }
+
+        let new_info = Arc::new(OCABundleInfo::new(self));
+        cache.insert(key, Arc::downgrade(&new_info));
+        new_info
     }
 }
 

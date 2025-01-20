@@ -996,6 +996,7 @@ dependencies = [
 name = "oca-sdk-rs"
 version = "0.1.2"
 dependencies = [
+ "lazy_static",
  "oca-ast-semantics",
  "oca-bundle-semantics",
  "oca-rs",

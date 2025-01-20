@@ -7,6 +7,7 @@ readme = "README.md"
 description = "Comprehensive SDK for OCA Bundle management and integration"
 
 [dependencies]
+lazy_static = "1.5.0"
 oca-rs = { version = "0.6.8" }
 oca-ast-semantics = { version = "0.6.8" }
 oca-bundle-semantics = { version = "0.6.8", features = ["format_overlay"] }
