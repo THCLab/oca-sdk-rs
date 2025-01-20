@@ -994,7 +994,7 @@ dependencies = [
 
 [[package]]
 name = "oca-sdk-rs"
-version = "0.1.1"
+version = "0.1.2"
 dependencies = [
  "oca-ast-semantics",
  "oca-bundle-semantics",
