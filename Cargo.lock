@@ -814,9 +814,9 @@ dependencies = [
 
 [[package]]
 name = "oca-ast-semantics"
-version = "0.6.8"
+version = "0.6.9"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "e16ec427959c86d02b53830cb91ab63932fa516e0b0fb8dcc3f8a0da5fd40977"
+checksum = "71e41c056cc471accce23599c565f0856ad302609a57552f4ca72a428952cc78"
 dependencies = [
  "env_logger",
  "indexmap 1.9.3",
@@ -834,9 +834,9 @@ dependencies = [
 
 [[package]]
 name = "oca-ast-transformation"
-version = "0.6.8"
+version = "0.6.9"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "e51c936ec4be513402e3099775869dc81228dd65c20e62e8efcafdb6c9517648"
+checksum = "4274f62e4cfdf8535e95bbce8a34de5ff797b7c159d5768cd9ff26b7113bf7c8"
 dependencies = [
  "env_logger",
  "indexmap 1.9.3",
@@ -854,9 +854,9 @@ dependencies = [
 
 [[package]]
 name = "oca-bundle-semantics"
-version = "0.6.8"
+version = "0.6.9"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "bf56425494302493964dd47ce9754318c8c2dfa4bee6110f76cc0219a39d5b2f"
+checksum = "50bdce1a71321b88937ceb47982127efffc559e46fc4a8de4f1d3ec29a1e12d7"
 dependencies = [
  "cascade",
  "convert_case",
@@ -883,9 +883,9 @@ dependencies = [
 
 [[package]]
 name = "oca-dag-semantics"
-version = "0.6.8"
+version = "0.6.9"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "f069a5ff44a968b18353d7d5b7c6f111c4640d39954125e9c8e19b1eca117f0b"
+checksum = "a00fb5dd84d07df2b2fda5a9b8ee571fb15017093f5d379c5690c7b845276962"
 dependencies = [
  "dyn-clonable",
  "indexmap 1.9.3",
@@ -900,9 +900,9 @@ dependencies = [
 
 [[package]]
 name = "oca-file"
-version = "0.6.8"
+version = "0.6.9"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "882e0955cd4cc77ccab3341762a35d9ba74aad5887486179612778fc998ddf71"
+checksum = "d574a275da202ff1a695452ba82ed5405eb93ef4e17da84adc3243329de55619"
 dependencies = [
  "clap 4.5.23",
  "convert_case",
@@ -924,9 +924,9 @@ dependencies = [
 
 [[package]]
 name = "oca-file-semantics"
-version = "0.6.8"
+version = "0.6.9"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "ed75b4cc90d80983e024958b49efab069f43ef8fbf91e7f135087ea79159b9ef"
+checksum = "ec444bcb7009ed50ba369ca2b6772959562b4dd5bd01f0f432fc6e6c5777716e"
 dependencies = [
  "clap 4.5.23",
  "convert_case",
@@ -947,9 +947,9 @@ dependencies = [
 
 [[package]]
 name = "oca-file-transformation"
-version = "0.6.8"
+version = "0.6.9"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "2f2a9d6724fadb976f2bff5340246e681d2c613c3ce05abb81992f23d44b4f3b"
+checksum = "21ab58d91124cba685060153b586f9d3e905805e80f594c5050123dcbfda67bc"
 dependencies = [
  "clap 4.5.23",
  "convert_case",
@@ -970,9 +970,9 @@ dependencies = [
 
 [[package]]
 name = "oca-rs"
-version = "0.6.8"
+version = "0.6.9"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "ed39db2e0c2fc4baf724745b44ce2ef654d87556cb24f71cf45aba20bd99ce2c"
+checksum = "3369c505c79a4bcb1a1c254e4ed88b3fcc98caeeccd348beab6450487a67e301"
 dependencies = [
  "dyn-clonable",
  "isolang",
@@ -1642,9 +1642,9 @@ dependencies = [
 
 [[package]]
 name = "transformation-file"
-version = "0.6.8"
+version = "0.6.9"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "4e53ae1f03ea586b775f3d41058d17a697f7381c744af07a1a821189bf0ce736"
+checksum = "14593f8c2299c105a07221a007179a37b839780a87f8b473075387b0be56e9af"
 dependencies = [
  "indexmap 1.9.3",
  "oca-ast-transformation",
