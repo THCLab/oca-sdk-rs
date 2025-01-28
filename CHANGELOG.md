@@ -2,11 +2,18 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.5] - 2025-01-28
+
+### ⚙️ Miscellaneous Tasks
+
+- Update oca dependencies to 0.6.10
+
 ## [0.1.4] - 2025-01-28
 
 ### ⚙️ Miscellaneous Tasks
 
 - Update oca dependencies to 0.6.9
+- Release 0.1.4 version
 
 ## [0.1.3] - 2025-01-20
 
