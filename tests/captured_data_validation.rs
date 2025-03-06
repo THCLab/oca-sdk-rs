@@ -15,7 +15,7 @@ fn building_from_ocafile() -> Result<(), Box<dyn std::error::Error>> {
     let oca_bundle = build_from_ocafile(ocafile_str).unwrap();
     assert_eq!(
         oca_bundle.said.clone().unwrap().to_string(),
-        "EKHBds6myKVIsQuT7Zr23M8Xk_gwq-2SaDRUprvqOXxa"
+        "EEYimqMic0XCbGovyXRIxmXh0pjkWdxZUGp2TJ5XQHhU"
     );
 
     oca_bundle.info().attributes().for_each(|attr| {
