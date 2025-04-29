@@ -9,7 +9,7 @@
 //! - Validate data against OCA Bundle.
 //! - Traverse through OCA Bundle attributes.
 pub mod data_validator;
-pub use oca_ast_semantics::ast::{
+pub use oca_ast::ast::{
     recursive_attributes::NestedAttrTypeFrame, AttributeType, NestedAttrType,
     OverlayType, RefValue,
 };
@@ -55,8 +55,8 @@ pub use oca_ast_semantics::ast::{
 ///     }
 /// }
 /// ```
-pub use oca_bundle_semantics::state::validator::validate as validate_semantics;
-pub use oca_bundle_semantics::{
+pub use oca_bundle::state::validator::validate as validate_semantics;
+pub use oca_bundle::{
     controller::load_oca as load,
     state::{
         attribute::Attribute,
@@ -112,8 +112,6 @@ impl WithInfo for OCABundle {
 pub struct OCABundleInfo {
     attributes: HashMap<String, Attribute>,
     pub meta: HashMap<String, HashMap<String, String>>,
-    pub links: Vec<overlay::Link>,
-    pub framings: Vec<overlay::AttributeFraming>,
 }
 
 impl OCABundleInfo {
@@ -126,37 +124,9 @@ impl OCABundleInfo {
             })
         }
 
-        let mut overlays = bundle.overlays.clone();
-        let links: Vec<overlay::Link> = overlays
-            .iter_mut()
-            .filter(|o| o.as_any().downcast_ref::<overlay::Link>().is_some())
-            .map(|o| {
-                o.as_any()
-                    .downcast_ref::<overlay::Link>()
-                    .unwrap()
-                    .to_owned()
-            })
-            .collect();
-        let framings: Vec<overlay::AttributeFraming> = overlays
-            .iter_mut()
-            .filter(|o| {
-                o.as_any()
-                    .downcast_ref::<overlay::AttributeFraming>()
-                    .is_some()
-            })
-            .map(|o| {
-                o.as_any()
-                    .downcast_ref::<overlay::AttributeFraming>()
-                    .unwrap()
-                    .to_owned()
-            })
-            .collect();
-
         Self {
             attributes: oca_box.attributes,
             meta,
-            links,
-            framings,
         }
     }
 

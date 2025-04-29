@@ -1,5 +1,5 @@
-use oca_ast_semantics::ast::{AttributeType, NestedAttrType};
-use oca_bundle_semantics::state::{
+use oca_ast::ast::{AttributeType, NestedAttrType};
+use oca_bundle::state::{
     attribute::Attribute,
     entry_codes::EntryCodes,
     oca::{OCABox, OCABundle},

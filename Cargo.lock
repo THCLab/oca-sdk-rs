@@ -813,6 +813,25 @@ dependencies = [
 ]
 
 [[package]]
+name = "oca-ast"
+version = "2.0.0-rc2"
+dependencies = [
+ "env_logger",
+ "indexmap 1.9.3",
+ "log",
+ "recursion",
+ "regex",
+ "said",
+ "serde",
+ "serde-wasm-bindgen",
+ "serde_json",
+ "strum",
+ "strum_macros",
+ "thiserror 1.0.69",
+ "wasm-bindgen",
+]
+
+[[package]]
 name = "oca-ast-semantics"
 version = "0.7.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -850,6 +869,33 @@ dependencies = [
  "strum",
  "strum_macros",
  "thiserror 1.0.69",
+ "wasm-bindgen",
+]
+
+[[package]]
+name = "oca-bundle"
+version = "2.0.0-rc2"
+dependencies = [
+ "cascade",
+ "convert_case",
+ "dyn-clonable",
+ "erased-serde",
+ "getrandom",
+ "indexmap 1.9.3",
+ "isolang",
+ "lazy_static",
+ "linked-hash-map",
+ "oca-ast",
+ "paste",
+ "piccolo",
+ "regex",
+ "said",
+ "serde",
+ "serde-value",
+ "serde_json",
+ "serde_yaml",
+ "thiserror 1.0.69",
+ "urn",
  "wasm-bindgen",
 ]
 
@@ -998,8 +1044,8 @@ name = "oca-sdk-rs"
 version = "0.2.0"
 dependencies = [
  "lazy_static",
- "oca-ast-semantics",
- "oca-bundle-semantics",
+ "oca-ast",
+ "oca-bundle",
  "oca-rs",
  "serde",
  "serde_json",
