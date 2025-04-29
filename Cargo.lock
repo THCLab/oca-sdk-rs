@@ -834,16 +834,15 @@ dependencies = [
 ]
 
 [[package]]
-name = "oca-ast-semantics"
+name = "oca-ast-transformation"
 version = "0.7.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "3774fec44eb550f6d49061b5c3511fbce8acc1063b4871130424b08e3034564f"
+checksum = "e2aa5e0925a774935b6d7cc85c2421b995687493d8326c071c93bbd09a87bfd7"
 dependencies = [
  "env_logger",
  "indexmap 1.9.3",
  "log",
  "recursion",
- "regex",
  "said",
  "serde",
  "serde-wasm-bindgen",
@@ -856,9 +855,7 @@ dependencies = [
 
 [[package]]
 name = "oca-ast-transformation"
-version = "0.7.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "e2aa5e0925a774935b6d7cc85c2421b995687493d8326c071c93bbd09a87bfd7"
+version = "2.0.0-rc2"
 dependencies = [
  "env_logger",
  "indexmap 1.9.3",
@@ -902,45 +899,14 @@ dependencies = [
 ]
 
 [[package]]
-name = "oca-bundle-semantics"
-version = "0.7.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "9756f0c176f4345af1f9b4a157cc46cc50867f2cf0b865dfd360daedce0b9256"
-dependencies = [
- "cascade",
- "convert_case",
- "dyn-clonable",
- "erased-serde",
- "getrandom",
- "indexmap 1.9.3",
- "isolang",
- "lazy_static",
- "linked-hash-map",
- "oca-ast-semantics",
- "paste",
- "piccolo",
- "regex",
- "said",
- "serde",
- "serde-value",
- "serde_json",
- "serde_yaml",
- "thiserror 1.0.69",
- "urn",
- "wasm-bindgen",
-]
-
-[[package]]
-name = "oca-dag-semantics"
-version = "0.7.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "f671d5b4e7afbb6ec5b7880fa3eab5d426f82a71681f73122ab69aa21458aa16"
+name = "oca-dag"
+version = "2.0.0-rc2"
 dependencies = [
  "dyn-clonable",
  "indexmap 1.9.3",
  "isolang",
- "oca-ast-semantics",
- "oca-bundle-semantics",
+ "oca-ast",
+ "oca-bundle",
  "said",
  "serde",
  "serde_json",
@@ -949,9 +915,7 @@ dependencies = [
 
 [[package]]
 name = "oca-file"
-version = "0.7.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "b16f341b9e1c27d12ea84ba215619664e1d981357f177fff77c8321f22d8ed5c"
+version = "2.0.0-rc2"
 dependencies = [
  "clap 4.5.37",
  "convert_case",
@@ -973,16 +937,14 @@ dependencies = [
 
 [[package]]
 name = "oca-file-semantics"
-version = "0.7.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "61323a5e474f3cd2ea40b9dee8a304a831bdf8cfcf7e58a823e18814113bf1f8"
+version = "2.0.0-rc2"
 dependencies = [
  "clap 4.5.37",
  "convert_case",
  "env_logger",
  "indexmap 1.9.3",
  "log",
- "oca-ast-semantics",
+ "oca-ast",
  "pest",
  "pest_derive",
  "pretty_assertions",
@@ -996,16 +958,14 @@ dependencies = [
 
 [[package]]
 name = "oca-file-transformation"
-version = "0.7.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "61eb12dd03797cb8e3af4a21d4ffa5b087d472a1ae3ebf20ba5df15414db0698"
+version = "2.0.0-rc2"
 dependencies = [
  "clap 4.5.37",
  "convert_case",
  "env_logger",
  "indexmap 1.9.3",
  "log",
- "oca-ast-transformation",
+ "oca-ast-transformation 2.0.0-rc2",
  "pest",
  "pest_derive",
  "pretty_assertions",
@@ -1019,16 +979,14 @@ dependencies = [
 
 [[package]]
 name = "oca-rs"
-version = "0.7.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "0f0f9324439f56dce0bc1391a6e9127b89eedc79f3abced0410c3d507faf783f"
+version = "2.0.0-rc2"
 dependencies = [
  "dyn-clonable",
  "isolang",
  "log",
- "oca-ast-semantics",
- "oca-bundle-semantics",
- "oca-dag-semantics",
+ "oca-ast",
+ "oca-bundle",
+ "oca-dag",
  "oca-file",
  "oca-file-semantics",
  "regex",
@@ -1038,7 +996,7 @@ dependencies = [
  "serde_json",
  "sled",
  "thiserror 1.0.69",
- "transformation-file",
+ "transformation-file 2.0.0-rc2",
 ]
 
 [[package]]
@@ -1051,7 +1009,7 @@ dependencies = [
  "oca-rs",
  "serde",
  "serde_json",
- "transformation-file",
+ "transformation-file 0.7.1",
 ]
 
 [[package]]
@@ -1696,7 +1654,22 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "380ffb81acf702fe00372e481139adbc309a756b3b8bd8143598a965a87f4e6d"
 dependencies = [
  "indexmap 1.9.3",
- "oca-ast-transformation",
+ "oca-ast-transformation 0.7.1",
+ "said",
+ "serde",
+ "serde-value",
+ "serde_json",
+ "serde_yaml",
+ "thiserror 1.0.69",
+ "wasm-bindgen",
+]
+
+[[package]]
+name = "transformation-file"
+version = "2.0.0-rc2"
+dependencies = [
+ "indexmap 1.9.3",
+ "oca-ast-transformation 2.0.0-rc2",
  "said",
  "serde",
  "serde-value",

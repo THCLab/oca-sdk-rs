@@ -15,14 +15,12 @@ fn building_from_ocafile() -> Result<(), Box<dyn std::error::Error>> {
     let oca_bundle = build_from_ocafile(ocafile_str).unwrap();
     assert_eq!(
         oca_bundle.said.clone().unwrap().to_string(),
-        "EEYimqMic0XCbGovyXRIxmXh0pjkWdxZUGp2TJ5XQHhU"
+        "EL7Qhl-wWldmBoJ0-sx35EL4gRXDQixm69zOphfwySfG"
     );
 
     oca_bundle.info().attributes().for_each(|attr| {
         println!("{:?}", attr);
     });
-    println!("links: {:?}", oca_bundle.info().links);
-    println!("framings: {:?}", oca_bundle.info().framings);
     println!("{}", oca_bundle.get_json_bundle());
 
     Ok(())
