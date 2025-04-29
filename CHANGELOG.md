@@ -2,11 +2,18 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.0.0-rc1] - 2025-04-29
+
+### 🚀 Features
+
+- Update oca to 2.0.0
+
 ## [0.2.0] - 2025-03-06
 
 ### ⚙️ Miscellaneous Tasks
 
 - Update oca dependencies to 0.7.1
+- Release 0.2.0 version
 
 ## [0.1.5] - 2025-01-28
 
