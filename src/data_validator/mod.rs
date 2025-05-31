@@ -2,7 +2,7 @@ use oca_ast::ast::{AttributeType, NestedAttrType};
 use oca_bundle::state::{
     attribute::Attribute,
     entry_codes::EntryCodes,
-    oca::{OCABox, OCABundle},
+    oca_bundle::OCABundleModel,
 };
 use serde_json::Value;
 
@@ -42,16 +42,14 @@ pub enum DataValidationStatus {
 /// * Returns `Ok(DataValidationStatus::Invalid)` if validation fails, with a
 ///   vector of detailed error messages.
 ///
-pub fn validate_data(oca: &OCABundle, data: &Value) -> Result<DataValidationStatus, String> {
+pub fn validate_data(oca: &OCABundleModel, data: &Value) -> Result<DataValidationStatus, String> {
     let mut errors = vec![];
-
-    let oca_box = OCABox::from(oca.clone());
 
     if !data.is_object() {
         return Err("Data is not an object".to_string());
     }
 
-    for attr in oca_box.attributes.values() {
+    for attr in oca.attributes.as_ref().unwrap().values() {
         let value = data.get(attr.name.clone());
         let attribute_errors = validate_attribute(attr, value)?;
 
@@ -73,7 +71,7 @@ fn validate_attribute(
 ) -> Result<Vec<String>, String> {
     let mut errors = vec![];
 
-    let is_required = attribute.conformance == Some("M".to_string());
+    let is_required = false; // TODO Replace with overlay_Def attribute.conformance == Some("M".to_string());
 
     let v = match value {
         Some(value) => value,
@@ -149,30 +147,31 @@ fn validate_attribute(
         }
     }
 
-    if let Some(entry_codes) = &attribute.entry_codes {
-        match entry_codes {
-            EntryCodes::Array(codes) => {
-                if !codes.contains(&v.as_str().unwrap().to_string()) {
-                    errors.push(format!(
-                        "Attribute \"{}\" value ({}) is not in entry codes",
-                        attribute.name, v
-                    ));
-                }
-            }
-            EntryCodes::Object(codes) => {
-                if !codes
-                    .values()
-                    .any(|c| c.contains(&v.as_str().unwrap().to_string()))
-                {
-                    errors.push(format!(
-                        "Attribute \"{}\" value ({}) is not in entry codes",
-                        attribute.name, v
-                    ));
-                }
-            }
-            _ => {}
-        }
-    }
+    // TODO: repace with overlay_Def
+    // if let Some(entry_codes) = &attribute.entry_codes {
+    //     match entry_codes {
+    //         EntryCodes::Array(codes) => {
+    //             if !codes.contains(&v.as_str().unwrap().to_string()) {
+    //                 errors.push(format!(
+    //                     "Attribute \"{}\" value ({}) is not in entry codes",
+    //                     attribute.name, v
+    //                 ));
+    //             }
+    //         }
+    //         EntryCodes::Object(codes) => {
+    //             if !codes
+    //                 .values()
+    //                 .any(|c| c.contains(&v.as_str().unwrap().to_string()))
+    //             {
+    //                 errors.push(format!(
+    //                     "Attribute \"{}\" value ({}) is not in entry codes",
+    //                     attribute.name, v
+    //                 ));
+    //             }
+    //         }
+    //         _ => {}
+    //     }
+    // }
 
     Ok(errors)
 }

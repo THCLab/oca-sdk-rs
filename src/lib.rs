@@ -11,9 +11,10 @@
 pub mod data_validator;
 pub use oca_ast::ast::{
     recursive_attributes::NestedAttrTypeFrame, AttributeType, NestedAttrType,
-    OverlayType, RefValue,
+    RefValue,
 };
 
+use oca_bundle::state::oca_bundle::OCABundleModel;
 /// Performs semantic validation of an `OCABundle` and returns a status
 /// indicating whether the validation succeeded or failed, along with any associated errors.
 ///
@@ -27,7 +28,7 @@ pub use oca_ast::ast::{
 /// # Returns
 /// * `Ok(SemanticValidationStatus::Valid)` - If the `OCABundle` passes all semantic validation checks.
 /// * `Ok(SemanticValidationStatus::Invalid(errors))` - If validation errors are found, with a vector of error messages.
-/// * `Err(String)` - If a critical error occurs during validation.
+/// * `Err(String)` - If  a critical error occurs during validation.
 ///
 /// # Errors
 /// * Returns `Err` with a string message if the validation process encounters unexpected errors.
@@ -60,28 +61,30 @@ pub use oca_bundle::{
     controller::load_oca as load,
     state::{
         attribute::Attribute,
-        oca::{overlay, OCABox, OCABundle},
         validator::{SemanticValidationStatus, Validator as OCAValidator},
     },
 };
-pub use oca_rs::facade::{
+pub use oca_store::facade::{
     build::{build_from_ocafile, parse_oca_bundle_to_ocafile},
     Facade,
 };
-use oca_rs::{EncodeBundle, HashFunctionCode, SerializationFormats};
 use std::collections::HashMap;
 use std::sync::{Arc, Mutex, Weak};
+
+
+pub use overlay_file::overlay_registry;
 
 pub trait ToJSON {
     fn get_json_bundle(&self) -> String;
 }
 
-impl ToJSON for OCABundle {
+impl ToJSON for OCABundleModel {
     fn get_json_bundle(&self) -> String {
-        let code = HashFunctionCode::Blake3_256;
-        let format = SerializationFormats::JSON;
-
-        String::from_utf8(self.encode(&code, &format).unwrap()).unwrap()
+        let result = self.to_json();
+        match result {
+            Ok(json) => json,
+            Err(e) => format!("Error converting to JSON: {}", e),
+        }
     }
 }
 
@@ -93,9 +96,9 @@ pub trait WithInfo {
     fn info(&self) -> Arc<OCABundleInfo>;
 }
 
-impl WithInfo for OCABundle {
+impl WithInfo for OCABundleModel {
     fn info(&self) -> Arc<OCABundleInfo> {
-        let key = self as *const OCABundle as usize;
+        let key = self as *const OCABundleModel as usize;
         let mut cache = INFO_CACHE.lock().unwrap();
         if let Some(weak_info) = cache.get(&key) {
             if let Some(info) = weak_info.upgrade() {
@@ -110,31 +113,33 @@ impl WithInfo for OCABundle {
 }
 
 pub struct OCABundleInfo {
-    attributes: HashMap<String, Attribute>,
+    // TODO Find out if this should be option or not
+    attributes: Option<HashMap<String, Attribute>>,
     pub meta: HashMap<String, HashMap<String, String>>,
 }
 
 impl OCABundleInfo {
-    pub fn new(bundle: &OCABundle) -> Self {
+    pub fn new(bundle: &OCABundleModel) -> Self {
         let mut meta = HashMap::new();
-        let oca_box = OCABox::from(bundle.clone());
-        if let Some(m) = oca_box.meta {
-            m.iter().for_each(|(k, v)| {
-                meta.insert(k.to_639_3().to_string(), v.to_owned());
-            })
-        }
+        // TODO fix it
+        // let oca_box = OCABox::from(bundle.clone());
+        // if let Some(m) = oca_box.meta {
+        //     m.iter().for_each(|(k, v)| {
+        //         meta.insert(k.unwrap().to_639_3().to_string(), v.to_owned());
+        //     })
+        // }
 
         Self {
-            attributes: oca_box.attributes,
+            attributes: bundle.attributes.clone(),
             meta,
         }
     }
 
     pub fn attributes(&self) -> impl Iterator<Item = &Attribute> {
-        self.attributes.values()
+        self.attributes.as_ref().unwrap().values()
     }
 
     pub fn attribute(&self, name: &str) -> Option<&Attribute> {
-        self.attributes.get(name)
+        self.attributes.as_ref().unwrap().get(name)
     }
 }
