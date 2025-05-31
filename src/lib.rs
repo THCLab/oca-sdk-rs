@@ -14,7 +14,7 @@ pub use oca_ast::ast::{
     RefValue,
 };
 
-use oca_bundle::state::oca_bundle::OCABundleModel;
+pub use oca_bundle::state::oca_bundle::OCABundleModel;
 /// Performs semantic validation of an `OCABundle` and returns a status
 /// indicating whether the validation succeeded or failed, along with any associated errors.
 ///
@@ -73,6 +73,9 @@ use std::sync::{Arc, Mutex, Weak};
 
 
 pub use overlay_file::overlay_registry;
+pub use oca_bundle::state::oca_bundle::SelfAddressingIdentifier;
+pub use oca_bundle::state::oca_bundle::{HashFunction, HashFunctionCode};
+pub use oca_bundle::state::oca_bundle::error as said_error;
 
 pub trait ToJSON {
     fn get_json_bundle(&self) -> String;
