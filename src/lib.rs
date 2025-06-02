@@ -14,7 +14,7 @@ pub use oca_ast::ast::{
     RefValue,
 };
 
-use oca_bundle::state::oca_bundle::OCABundle;
+pub use oca_bundle::state::oca_bundle::OCABundle;
 pub use oca_bundle::state::oca_bundle::OCABundleModel;
 /// Performs semantic validation of an `OCABundle` and returns a status
 /// indicating whether the validation succeeded or failed, along with any associated errors.
