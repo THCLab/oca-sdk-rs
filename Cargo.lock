@@ -1037,6 +1037,7 @@ checksum = "e2355d85b9a3786f481747ced0e0ff2ba35213a1f9bd406ed906554d7af805a1"
 name = "overlay-file"
 version = "1.0.0-rc1"
 dependencies = [
+ "env_logger 0.11.8",
  "indexmap 1.9.3",
  "log",
  "pest",

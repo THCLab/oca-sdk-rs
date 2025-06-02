@@ -14,6 +14,7 @@ pub use oca_ast::ast::{
     RefValue,
 };
 
+use oca_bundle::state::oca_bundle::OCABundle;
 pub use oca_bundle::state::oca_bundle::OCABundleModel;
 /// Performs semantic validation of an `OCABundle` and returns a status
 /// indicating whether the validation succeeded or failed, along with any associated errors.
@@ -83,7 +84,8 @@ pub trait ToJSON {
 
 impl ToJSON for OCABundleModel {
     fn get_json_bundle(&self) -> String {
-        let result = self.to_json();
+        let oca_bundle = OCABundle::from(self.clone());
+        let result = serde_json::to_string_pretty(&oca_bundle);
         match result {
             Ok(json) => json,
             Err(e) => format!("Error converting to JSON: {}", e),
