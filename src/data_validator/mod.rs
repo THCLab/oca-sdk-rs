@@ -1,8 +1,6 @@
 use oca_ast::ast::{AttributeType, NestedAttrType};
 use oca_bundle::state::{
-    attribute::Attribute,
-    entry_codes::EntryCodes,
-    oca_bundle::OCABundleModel,
+    attribute::Attribute, entry_codes::EntryCodes, oca_bundle::OCABundleModel,
 };
 use serde_json::Value;
 

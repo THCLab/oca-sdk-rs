@@ -1,7 +1,9 @@
 use oca_sdk_rs::{
     build_from_ocafile,
     data_validator::{validate_data, DataValidationStatus},
-    load, validate_semantics, SemanticValidationStatus, ToJSON, WithInfo,
+    load,
+    overlay_registry::OverlayLocalRegistry,
+    validate_semantics, SemanticValidationStatus, ToJSON, WithInfo,
 };
 use std::fs;
 use std::path::Path;
@@ -12,16 +14,17 @@ fn building_from_ocafile() -> Result<(), Box<dyn std::error::Error>> {
     assert!(ocafile_path.exists(), "Asset file not found!");
     let ocafile_str = fs::read_to_string(ocafile_path)?;
 
-    let oca_bundle = build_from_ocafile(ocafile_str).unwrap();
+    let overlay_registry = OverlayLocalRegistry::from_dir("test/assets/overlay-file/")?;
+    let oca_bundle = build_from_ocafile(ocafile_str, overlay_registry).unwrap();
     assert_eq!(
-        oca_bundle.said.clone().unwrap().to_string(),
+        oca_bundle.model.digest.clone().unwrap().to_string(),
         "EL7Qhl-wWldmBoJ0-sx35EL4gRXDQixm69zOphfwySfG"
     );
 
-    oca_bundle.info().attributes().for_each(|attr| {
+    oca_bundle.model.info().attributes().for_each(|attr| {
         println!("{:?}", attr);
     });
-    println!("{}", oca_bundle.get_json_bundle());
+    println!("{}", oca_bundle.model.get_json_bundle());
 
     Ok(())
 }

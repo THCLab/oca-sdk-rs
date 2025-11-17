@@ -10,8 +10,7 @@
 //! - Traverse through OCA Bundle attributes.
 pub mod data_validator;
 pub use oca_ast::ast::{
-    recursive_attributes::NestedAttrTypeFrame, AttributeType, NestedAttrType,
-    RefValue,
+    recursive_attributes::NestedAttrTypeFrame, AttributeType, NestedAttrType, RefValue,
 };
 
 pub use oca_bundle::state::oca_bundle::OCABundle;
@@ -67,16 +66,22 @@ pub use oca_bundle::{
 };
 pub use oca_store::facade::{
     build::{build_from_ocafile, parse_oca_bundle_to_ocafile},
-    Facade,
+    Facade as Store,
 };
+
+pub use oca_store::data_storage::DataStorage;
+pub use oca_store::data_storage::FileSystemStorage;
+pub use oca_store::data_storage::FileSystemStorageConfig;
+pub use oca_store::data_storage::SledDataStorage;
+pub use oca_store::data_storage::SledDataStorageConfig;
+pub use oca_store::repositories::SQLiteConfig;
 use std::collections::HashMap;
 use std::sync::{Arc, Mutex, Weak};
 
-
-pub use overlay_file::overlay_registry;
+pub use oca_bundle::state::oca_bundle::error as said_error;
 pub use oca_bundle::state::oca_bundle::SelfAddressingIdentifier;
 pub use oca_bundle::state::oca_bundle::{HashFunction, HashFunctionCode};
-pub use oca_bundle::state::oca_bundle::error as said_error;
+pub use overlay_file::overlay_registry;
 
 pub trait ToJSON {
     fn get_json_bundle(&self) -> String;

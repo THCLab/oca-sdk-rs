@@ -1,0 +1,71 @@
+ADD OVERLAY label
+  VERSION 2.0.0
+  ADD ATTRIBUTES language=Text
+  ADD OBJECT attr_labels
+    WITH KEYS attr-names
+    WITH VALUES Text
+
+ADD OVERLAY Meta
+  VERSION 2.0.0
+  UNIQUE KEYS language
+  ADD ATTRIBUTES language=Lang
+  ADD ATTRIBUTES [description, name]
+    WITH VALUES Text
+  ADD ATTRIBUTES [...]
+    WITH VALUES ANY
+
+
+ADD OVERLAY Character_Encoding
+  VERSION 2.0.0
+  ADD OBJECT attribute_character_encoding
+    WITH KEYS attr-names
+    WITH VALUES Text
+
+ADD OVERLAY conformance
+  version 2.0.0
+  add object attribute_conformance
+    with keys attr-names
+    with values text
+
+
+add overlay format
+  version 2.0.0
+  add object attribute_formats
+    with keys attr-names
+    with values text
+
+add overlay unit
+  version 2.0.0
+  add object attribute_units
+    with keys attr-names
+    with values text
+
+add overlay cardinality
+  version 2.0.0
+  add object attr_cardinality
+    with keys attr-names
+    with values text
+
+ADD OVERLAY ENTRY_CODE
+  version 2.0.0
+  add object attribute_entry_codes
+    with keys attr-names
+    with values array|ref
+
+ADD Overlay ENTRY
+  version 2.0.0
+  add object attribute_entries
+    with keys attr-names
+    with values object|ref
+
+ADD Overlay Information
+  version 2.0.0
+  add object attribute_information
+    with keys attr-names
+    with values Text
+
+ADD overlay sensitive
+  version 2.0.0
+  add array attributes
+    with values attr-names
+
