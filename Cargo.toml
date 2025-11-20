@@ -8,10 +8,10 @@ description = "Comprehensive SDK for OCA Bundle management and integration"
 
 [dependencies]
 lazy_static = "1.5.0"
-oca-ast = { version = "2.0.0-rc2", path = "../oca-rs/oca-ast" }
-oca-bundle= { version = "2.0.0-rc2", path = "../oca-rs/oca-bundle" }
-oca-store = { version = "2.0.0-rc2", path = "../oca-rs/oca-store" }
-overlay-file = { version = "1.0.0-rc1", path = "../oca-rs/overlay-file" }
+oca-ast = { version = "2.0.0-rc.2" }
+oca-bundle= { version = "2.0.0-rc.4" }
+oca-store = { version = "2.0.0-rc.2" }
+overlay-file = { version = "1.0.0-rc.2" }
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
 transformation-file = { version = "0.7.1" }
