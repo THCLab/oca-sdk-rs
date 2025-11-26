@@ -1,7 +1,5 @@
 use oca_ast::ast::{AttributeType, NestedAttrType};
-use oca_bundle::state::{
-    attribute::Attribute, entry_codes::EntryCodes, oca_bundle::OCABundleModel,
-};
+use oca_bundle::state::{attribute::Attribute, oca_bundle::OCABundleModel};
 use serde_json::Value;
 
 /// Represents the validation status of the data.
@@ -40,12 +38,16 @@ pub enum DataValidationStatus {
 /// * Returns `Ok(DataValidationStatus::Invalid)` if validation fails, with a
 ///   vector of detailed error messages.
 ///
-pub fn validate_data(oca: &OCABundleModel, data: &Value) -> Result<DataValidationStatus, String> {
+pub fn validate_data(
+    oca: &mut OCABundleModel,
+    data: &Value,
+) -> Result<DataValidationStatus, String> {
     let mut errors = vec![];
 
     if !data.is_object() {
         return Err("Data is not an object".to_string());
     }
+    oca.fill_attributes();
 
     for attr in oca.attributes.as_ref().unwrap().values() {
         let value = data.get(attr.name.clone());

@@ -38,11 +38,12 @@ pub use oca_bundle::state::oca_bundle::OCABundleModel;
 /// use std::fs;
 /// use std::path::Path;
 /// use oca_sdk_rs::{load, validate_semantics, SemanticValidationStatus};
+/// use oca_sdk_rs::overlay_registry::OverlayLocalRegistry;
 ///
-/// let structural_bundle_path = Path::new("tests/assets/semantics/structural_bundle.json");
+/// let structural_bundle_path = Path::new("tests/assets/semantics/structural_bundle2.json");
 /// let structural_bundle_str = fs::read_to_string(structural_bundle_path).expect("Failed to read the file");
-///
-/// let structural_bundle = load(&mut structural_bundle_str.as_bytes()).unwrap();
+/// let overlay_registry = OverlayLocalRegistry::from_dir("tests/assets/overlay-file/").unwrap();
+/// let structural_bundle = load(&mut structural_bundle_str.as_bytes(), &overlay_registry).unwrap();
 ///
 /// let semantics_validation_status = validate_semantics(&structural_bundle).unwrap();
 ///
@@ -130,7 +131,7 @@ pub struct OCABundleInfo {
 
 impl OCABundleInfo {
     pub fn new(bundle: &OCABundleModel) -> Self {
-        let mut meta = HashMap::new();
+        let meta = HashMap::new();
         // TODO fix it
         // let oca_box = OCABox::from(bundle.clone());
         // if let Some(m) = oca_box.meta {

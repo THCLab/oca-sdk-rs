@@ -1,0 +1,311 @@
+{
+  "v": "OCAS02JSON0016d4_",
+  "digest": "EJ1uVSM9BIodeTRG_STMTLmjqTn9XxmOCPIaCsM5INIl",
+  "capture_base": {
+    "digest": "EPJ-Cqd2keH9NTXQg_MoUUQbR-0EBaW0u0IVx8JwEZ2K",
+    "type": "capture_base/2.0.0",
+    "attributes": {
+      "add_optional_customer": "Boolean",
+      "customer": "refs:ELGWVXrWMV-VE2FFvpBUnc1kitYaqdjQkt0fc548Rdci",
+      "d": "Text",
+      "date": "DateTime",
+      "devices": [
+        "refs:EC8R1ohDQn3ceXCn2SAMdn3lmDlfudj09JI5ReyW-cdH"
+      ],
+      "i": "Text",
+      "img": "Binary",
+      "isbn": "Text",
+      "list_bool": [
+        "Boolean"
+      ],
+      "list_date": [
+        "DateTime"
+      ],
+      "list_file": [
+        "Binary"
+      ],
+      "list_num": [
+        "Numeric"
+      ],
+      "list_question": [
+        "refs:EPx6U76rCHy_D008Nez5gbE3NOcZW3V0N59DLM2COeZS"
+      ],
+      "list_sign": [
+        "Binary"
+      ],
+      "list_text": [
+        "Text"
+      ],
+      "list_text2": [
+        "Text"
+      ],
+      "list_text3": [
+        "Text"
+      ],
+      "nice_attr": "Text",
+      "num": "Numeric",
+      "num2": "Numeric",
+      "num3": "Numeric",
+      "optional_customer": "refs:EPH3m3t9TZ3NcVZvoyFweRAN1YnMhNSGAEpKUefl7oAO",
+      "passed": "Boolean",
+      "question1": "refs:EPx6U76rCHy_D008Nez5gbE3NOcZW3V0N59DLM2COeZS",
+      "radio1": "Text",
+      "radio2": "Text",
+      "radio3": "Boolean",
+      "select": "Text",
+      "selectmulti": [
+        "Text"
+      ],
+      "sign": "Binary",
+      "sign_with_geolocation": "refs:ELCZFawLrtXg-Cvh5VQ2gKC9aVy15tZpmmCDyFKx2OC9",
+      "text_attr1": "Text",
+      "text_attr2": "Text",
+      "time": "DateTime"
+    }
+  },
+  "overlays": [
+    {
+      "digest": "EIqpIkGpbIdqSBKjuRupwLUHn2zoPTeP61q1yHEd5VWe",
+      "capture_base": "EPJ-Cqd2keH9NTXQg_MoUUQbR-0EBaW0u0IVx8JwEZ2K",
+      "type": "overlay/meta/2.0.0",
+      "language": "eng",
+      "description": "Entrance credential",
+      "name": "Entrance credential"
+    },
+    {
+      "digest": "EJ4RBNGXTXk7vaoUiZ6OsKd7mbVgmBG5bslELe-bKSd6",
+      "capture_base": "EPJ-Cqd2keH9NTXQg_MoUUQbR-0EBaW0u0IVx8JwEZ2K",
+      "type": "overlay/meta/2.0.0",
+      "language": "pol",
+      "description": "Kredenszjal wejściowy",
+      "name": "Kredenszjal wejściowy"
+    },
+    {
+      "digest": "EEEUVRKct4tVKZWmiipRJTupYwYtrPZYbukh_neeaCzD",
+      "capture_base": "EPJ-Cqd2keH9NTXQg_MoUUQbR-0EBaW0u0IVx8JwEZ2K",
+      "type": "overlay/character_encoding/2.0.0",
+      "attribute_character_encodings": {
+        "d": "utf-8",
+        "i": "utf-8",
+        "nice_attr": "utf-8",
+        "passed": "utf-8"
+      }
+    },
+    {
+      "digest": "EGGP2in6dFGa8iecTiat_c5KkCiwPoin_yFR5OQN4ozS",
+      "capture_base": "EPJ-Cqd2keH9NTXQg_MoUUQbR-0EBaW0u0IVx8JwEZ2K",
+      "type": "overlay/conformance/2.0.0",
+      "attribute_conformances": {
+        "d": "M",
+        "i": "M",
+        "nice_attr": "O",
+        "passed": "M",
+        "radio3": "M",
+        "select": "M",
+        "selectmulti": "M"
+      }
+    },
+    {
+      "digest": "EDeJ-dL57zVklByIS43r-bxHUnyZ9frH_ienG0_CPzSC",
+      "capture_base": "EPJ-Cqd2keH9NTXQg_MoUUQbR-0EBaW0u0IVx8JwEZ2K",
+      "type": "overlay/cardinality/2.0.0",
+      "attribute_cardinalities": {
+        "devices": "1-",
+        "list_file": "-4",
+        "list_text": "1-",
+        "list_text2": "2-",
+        "list_text3": "2"
+      }
+    },
+    {
+      "digest": "EJ47BecP4aYidanBg5XEXhHOB4E_nBISTQhXVcBgrB5n",
+      "capture_base": "EPJ-Cqd2keH9NTXQg_MoUUQbR-0EBaW0u0IVx8JwEZ2K",
+      "type": "overlay/format/2.0.0",
+      "attribute_formats": {
+        "date": "DD.MM.YYYY",
+        "i": "^issuer[0-9]+$",
+        "list_date": "DD/MM/YYYY (HH:mm:ss)",
+        "time": "hh:mm A"
+      }
+    },
+    {
+      "digest": "EHXDkiBBRv0iPQYMNymApKYEZZpRYXsA0VEQ9TaDlPca",
+      "capture_base": "EPJ-Cqd2keH9NTXQg_MoUUQbR-0EBaW0u0IVx8JwEZ2K",
+      "type": "overlay/unit/2.0.0",
+      "metric_system": "si",
+      "attribute_units": {
+        "list_num": "kg",
+        "num": "m"
+      }
+    },
+    {
+      "digest": "EPJAIpBf-zAVm9W9pwuSAdpD4dqkyB47_vfdPbECKyi-",
+      "capture_base": "EPJ-Cqd2keH9NTXQg_MoUUQbR-0EBaW0u0IVx8JwEZ2K",
+      "type": "overlay/label/2.0.0",
+      "language": "eng",
+      "attribute_labels": {
+        "add_optional_customer": "Add customer",
+        "customer": "Customer",
+        "d": "Schema digest",
+        "date": "Date",
+        "devices": "Devices",
+        "i": "Credential Issuee",
+        "img": "Image",
+        "isbn": "ISBN",
+        "list_bool": "List (bool)",
+        "list_date": "List (date)",
+        "list_file": "List (file)",
+        "list_num": "List (numeric)",
+        "list_question": "Questions",
+        "list_sign": "List (sign)",
+        "list_text": "Text list1",
+        "list_text2": "Text list2",
+        "list_text3": "Text list3",
+        "nice_attr": "Nice attribute",
+        "num": "Number",
+        "num2": "Number2",
+        "num3": "Number3",
+        "optional_customer": "Customer",
+        "passed": "Passed",
+        "question1": "Question 1",
+        "radio1": "Radio btn vertical",
+        "radio2": "Radio btn horizontal",
+        "radio3": "Radio boolean",
+        "select": "Select option lbl",
+        "selectmulti": "Multiselect",
+        "sign": "Signature",
+        "sign_with_geolocation": "Signature",
+        "text_attr1": "Vehicle",
+        "text_attr2": "Wheel",
+        "time": "Time"
+      }
+    },
+    {
+      "digest": "EMh3QXFIjxZA26AbES65N8uEHViwyD2XS7fmh98cJgqR",
+      "capture_base": "EPJ-Cqd2keH9NTXQg_MoUUQbR-0EBaW0u0IVx8JwEZ2K",
+      "type": "overlay/label/2.0.0",
+      "language": "pol",
+      "attribute_labels": {
+        "add_optional_customer": "Dodaj klienta",
+        "customer": "Klient",
+        "d": "trawić schemat",
+        "devices": "Urządzenia",
+        "i": "Kredenszjal wystawiacz",
+        "img": "Obrazek",
+        "isbn": "ISBN",
+        "list_question": "Pytania",
+        "nice_attr": "Ładny atrybut",
+        "optional_customer": "Klient",
+        "passed": "Zaliczony",
+        "question1": "Pytanie 1",
+        "radio1": "Radio guzik pionowy",
+        "radio2": "Radio guzik poziomy",
+        "radio3": "Radio bulin",
+        "select": "Wybierz opcję",
+        "selectmulti": "Multiselekt",
+        "sign": "Podpis",
+        "sign_with_geolocation": "Podpis",
+        "text_attr1": "Pojazd",
+        "text_attr2": "Koło"
+      }
+    },
+    {
+      "digest": "EHn5iGEIPGlaMF93k7ZFC6W834gAz2lqeqaqtuC1YmKJ",
+      "capture_base": "EPJ-Cqd2keH9NTXQg_MoUUQbR-0EBaW0u0IVx8JwEZ2K",
+      "type": "overlay/entry/2.0.0",
+      "language": "eng",
+      "attribute_entries": {
+        "radio1": {
+          "o1": "Jeden",
+          "o2": "Dwa",
+          "o3": "Trzy",
+          "radio2": {
+            "o1": "Jeden",
+            "o2": "Dwa",
+            "o3": "Trzy",
+            "o4": "Cztery",
+            "o5": "Pięć",
+            "o6": "Sześć",
+            "select": {
+              "g1": "group 1",
+              "g2": "group 2",
+              "o1": "o1_label",
+              "o2": "o2_label",
+              "o3": "o3_label",
+              "selectmulti": {
+                "g3": "Group 3",
+                "g4": "Group 4",
+                "o4": "Four",
+                "o5": "Five",
+                "o6": "Six",
+                "o7": "Seven"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "digest": "ELlMDS16K1U6p6uqX5u39d_9DbYXggKOavg6yaPp_WKu",
+      "capture_base": "EPJ-Cqd2keH9NTXQg_MoUUQbR-0EBaW0u0IVx8JwEZ2K",
+      "type": "overlay/entry/2.0.0",
+      "language": "pol",
+      "attribute_entries": {
+        "select": {
+          "g1": "grupa 1",
+          "g2": "grupa 2",
+          "o1": "o1_etykieta",
+          "o2": "o2_etykieta",
+          "o3": "o3_etykieta",
+          "selectmulti": {
+            "g3": "Grupa 3",
+            "g4": "Grupa 4",
+            "o4": "Cztery",
+            "o5": "Pięc",
+            "o6": "Sześć",
+            "o7": "Siedem"
+          }
+        }
+      }
+    },
+    {
+      "digest": "EPwNrEVe-A6nSQFr3AAr8uEkQV37vt37-xX-nW_KrUZ8",
+      "capture_base": "EPJ-Cqd2keH9NTXQg_MoUUQbR-0EBaW0u0IVx8JwEZ2K",
+      "type": "overlay/entry_code/2.0.0",
+      "attribute_entry_codes": {
+        "radio1": [
+          "o1",
+          "o2",
+          "o3"
+        ],
+        "radio2": [
+          "o1",
+          "o2",
+          "o3",
+          "o4",
+          "o5",
+          "o6"
+        ],
+        "select": {
+          "g1": [
+            "o1"
+          ],
+          "g2": [
+            "o2",
+            "o3"
+          ],
+          "selectmulti": {
+            "g3": [
+              "o4",
+              "o5"
+            ],
+            "g4": [
+              "o6",
+              "o7"
+            ]
+          }
+        }
+      }
+    }
+  ]
+}

@@ -1,11 +1,12 @@
 ADD OVERLAY label
   VERSION 2.0.0
-  ADD ATTRIBUTES language=Text
-  ADD OBJECT attr_labels
+  UNIQUE KEYS language
+  ADD ATTRIBUTES language=Lang
+  ADD OBJECT attribute_labels
     WITH KEYS attr-names
     WITH VALUES Text
 
-ADD OVERLAY Meta
+ADD OVERLAY meta
   VERSION 2.0.0
   UNIQUE KEYS language
   ADD ATTRIBUTES language=Lang
@@ -14,58 +15,73 @@ ADD OVERLAY Meta
   ADD ATTRIBUTES [...]
     WITH VALUES ANY
 
-
-ADD OVERLAY Character_Encoding
+ADD OVERLAY character_encoding
   VERSION 2.0.0
-  ADD OBJECT attribute_character_encoding
+  ADD OBJECT attribute_character_encodings
     WITH KEYS attr-names
     WITH VALUES Text
 
 ADD OVERLAY conformance
-  version 2.0.0
-  add object attribute_conformance
-    with keys attr-names
-    with values text
+  VERSION 2.0.0
+  ADD OBJECT attribute_conformances
+    WITH KEYS attr-names
+    WITH VALUES text
 
+ADD OVERLAY format
+  VERSION 2.0.0
+  ADD OBJECT attribute_formats
+    WITH KEYS attr-names
+    WITH VALUES text
 
-add overlay format
-  version 2.0.0
-  add object attribute_formats
-    with keys attr-names
-    with values text
+ADD OVERLAY unit
+  VERSION 2.0.0
+  ADD ATTRIBUTES metric_system=Text
+  ADD OBJECT attribute_units
+    WITH KEYS attr-names
+    WITH VALUES text
 
-add overlay unit
-  version 2.0.0
-  add object attribute_units
-    with keys attr-names
-    with values text
+ADD OVERLAY cardinality
+  VERSION 2.0.0
+  ADD OBJECT attribute_cardinalities
+    WITH KEYS attr-names
+    WITH VALUES text
 
-add overlay cardinality
-  version 2.0.0
-  add object attr_cardinality
-    with keys attr-names
-    with values text
+ADD OVERLAY entry_code
+  VERSION 2.0.0
+  ADD OBJECT attribute_entry_codes
+    WITH KEYS attr-names
+    WITH VALUES ref|array
+      WITH VALUES text
 
-ADD OVERLAY ENTRY_CODE
-  version 2.0.0
-  add object attribute_entry_codes
-    with keys attr-names
-    with values array|ref
-
-ADD Overlay ENTRY
-  version 2.0.0
-  add object attribute_entries
-    with keys attr-names
-    with values object|ref
-
-ADD Overlay Information
-  version 2.0.0
-  add object attribute_information
-    with keys attr-names
-    with values Text
+ADD OVERLAY entry
+  VERSION 2.0.0
+  ADD ATTRIBUTES language=Lang
+  ADD OBJECT attribute_entries
+    WITH KEYS attr-names
+    WITH VALUES ref|object
+      WITH KEYS text
+      WITH VALUES Text
 
 ADD overlay sensitive
-  version 2.0.0
-  add array attributes
-    with values attr-names
+  VERSION 2.0.0
+  ADD ARRAY attributes
+    WITH VALUES attr-names
 
+ADD OVERLAY standard
+  VERSION 2.0.0
+  ADD OBJECT attribute_standards
+    WITH KEYS attr-names
+    WITH VALUES text
+
+ADD OVERLAY mapping
+  VERSION 2.0.0
+  ADD OBJECT attribute_mappings
+    WITH KEYS attr-names
+    WITH VALUES text
+
+ADD OVERLAY entry_code_mapping
+  VERSION 2.0.0
+  ADD OBJECT attribute_entry_codes_mappings
+    WITH KEYS text
+    WITH VALUES ref|array
+      WITH VALUES text
