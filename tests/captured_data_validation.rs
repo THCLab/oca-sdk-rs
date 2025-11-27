@@ -3,7 +3,7 @@ use oca_sdk_rs::{
     data_validator::{validate_data, DataValidationStatus},
     load,
     overlay_registry::OverlayLocalRegistry,
-    validate_semantics, SemanticValidationStatus, ToJSON, WithInfo,
+    validate_semantics, SemanticValidationStatus,
 };
 use std::fs;
 use std::path::Path;
