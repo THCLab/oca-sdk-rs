@@ -987,7 +987,7 @@ dependencies = [
 
 [[package]]
 name = "oca-sdk-rs"
-version = "2.0.0-rc1"
+version = "2.0.0-rc.1"
 dependencies = [
  "lazy_static",
  "oca-ast",
