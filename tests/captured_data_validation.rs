@@ -1,7 +1,7 @@
+use oca_bundle::build::from_ast;
 use oca_sdk_rs::{
-    build_from_ocafile,
     data_validator::{validate_data, DataValidationStatus},
-    load,
+    load, ocafile,
     overlay_registry::OverlayLocalRegistry,
     validate_semantics, SemanticValidationStatus,
 };
@@ -15,7 +15,10 @@ fn building_from_ocafile() -> Result<(), Box<dyn std::error::Error>> {
     let ocafile_str = fs::read_to_string(ocafile_path)?;
 
     let overlay_registry = OverlayLocalRegistry::from_dir("tests/assets/overlay-file/")?;
-    let oca_bundle = build_from_ocafile(ocafile_str, overlay_registry).unwrap();
+
+    let oca_ast = ocafile::parse_from_string(ocafile_str, &overlay_registry)?;
+
+    let oca_bundle = from_ast(None, &oca_ast).unwrap().oca_bundle;
     assert_eq!(
         oca_bundle.digest.clone().unwrap().to_string(),
         "EJoSIDigqNcOhKb2sJsdIdYQbKN3Dkkwab539d6h82si"

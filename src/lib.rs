@@ -65,23 +65,13 @@ pub use oca_bundle::{
         validator::{SemanticValidationStatus, Validator as OCAValidator},
     },
 };
-pub use oca_store::facade::{
-    build::{build_from_ocafile, parse_oca_bundle_to_ocafile},
-    Facade as Store,
-};
-
-pub use oca_store::data_storage::DataStorage;
-pub use oca_store::data_storage::FileSystemStorage;
-pub use oca_store::data_storage::FileSystemStorageConfig;
-pub use oca_store::data_storage::SledDataStorage;
-pub use oca_store::data_storage::SledDataStorageConfig;
-pub use oca_store::repositories::SQLiteConfig;
 use std::collections::HashMap;
 use std::sync::{Arc, Mutex, Weak};
 
 pub use oca_bundle::state::oca_bundle::error as said_error;
 pub use oca_bundle::state::oca_bundle::SelfAddressingIdentifier;
 pub use oca_bundle::state::oca_bundle::{HashFunction, HashFunctionCode};
+pub use oca_file::ocafile;
 pub use overlay_file::overlay_registry;
 
 pub trait ToJSON {
