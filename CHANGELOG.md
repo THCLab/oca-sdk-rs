@@ -3,6 +3,10 @@
 ### 🚀 Features
 
 - Remove transformation
+
+### ⚙️ Miscellaneous Tasks
+
+- Release 2.0.0-rc.3 version
 ## [2.0.0-rc.2] - 2025-12-01
 
 ### 🚀 Features
