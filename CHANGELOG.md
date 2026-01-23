@@ -1,3 +1,8 @@
+## [2.0.0-rc.3] - 2026-01-23
+
+### 🚀 Features
+
+- Remove transformation
 ## [2.0.0-rc.2] - 2025-12-01
 
 ### 🚀 Features
@@ -24,6 +29,7 @@
 - Use new interface for generating bundle
 - Prepare for release
 - Remove unused imports and add .cargo to ignore
+- Release 2.0.0-rc.2 version
 ## [0.2.0] - 2025-03-06
 
 ### ⚙️ Miscellaneous Tasks
