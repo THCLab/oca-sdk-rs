@@ -34,7 +34,7 @@ fn building_from_ocafile() -> Result<(), Box<dyn std::error::Error>> {
 
 #[test]
 fn validate_captured_data() -> Result<(), Box<dyn std::error::Error>> {
-    let captured_data_path = Path::new("tests/assets/data/nested.json");
+    let captured_data_path = Path::new("tests/assets/data/nested_invalid.json");
     assert!(captured_data_path.exists(), "Asset file not found!");
     let data_str = fs::read_to_string(captured_data_path)?;
     let data = serde_json::from_str(&data_str)?;

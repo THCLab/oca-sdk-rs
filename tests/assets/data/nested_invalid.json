@@ -20,6 +20,6 @@
   "list_text": ["asd"],
   "list_text2": ["dsa", "asd"],
   "list_text3": ["dsa", "asd"],
-  "radio3": false,
+  "radio3": "false",
   "num": 2
 }
