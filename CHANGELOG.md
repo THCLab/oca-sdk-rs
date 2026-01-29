@@ -1,3 +1,13 @@
+## [2.0.0-rc.5] - 2026-01-29
+
+### ⚙️ Miscellaneous Tasks
+
+- Improve docs, tests and add examples
+## [2.0.0-rc.4] - 2026-01-23
+
+### ⚙️ Miscellaneous Tasks
+
+- Release 2.0.0-rc.4 version
 ## [2.0.0-rc.3] - 2026-01-23
 
 ### 🚀 Features
