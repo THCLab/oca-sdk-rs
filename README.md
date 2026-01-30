@@ -1,5 +1,29 @@
 # OCA SDK
-Comprehensive SDK for OCA Bundle management and integration
+Comprehensive SDK for OCA Bundle management and integration in Rust.
+
+This crate helps you:
+- parse OCAfiles,
+- build and validate OCA bundles,
+- validate captured data against bundles,
+- load/serialize bundles and overlays.
+
+For a step-by-step walkthrough with runnable commands, see `docs/quickstart.md`.
+
+## Usage (library)
+
+Add to your `Cargo.toml`:
+
+```
+oca-sdk-rs = "2.0.0-rc.5"
+```
+
+Then import what you need, for example:
+
+```
+use oca_sdk_rs::{load, validate_semantics, OCABundleModel, SemanticValidationStatus};
+```
+
+For end-to-end runnable flows, use the examples (next section) and `docs/quickstart.md`.
 
 ## License
 
@@ -27,4 +51,9 @@ Available examples:
 - `validate_data` — validate captured JSON data
 - `load_bundle_json` — load an existing bundle JSON
 - `generate_ocafile` — convert a bundle JSON back to ocafile
-See `docs/quickstart.md` for a step-by-step walkthrough.
+
+Notes:
+- Examples use fixtures under `tests/assets/` (paths are relative to the crate root).
+- If you run from a different working directory, use absolute paths or `cargo run --example <name> -- <args>`.
+
+See `docs/quickstart.md` for a step-by-step walkthrough with expected inputs/outputs.
