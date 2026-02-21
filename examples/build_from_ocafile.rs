@@ -1,8 +1,8 @@
 use std::fs;
 
 use oca_bundle::build::from_ast;
-use oca_sdk_rs::oca::overlay_file::OverlayLocalRegistry;
 use oca_sdk_rs::oca::file::parse_from_string;
+use oca_sdk_rs::oca::overlay_file::OverlayLocalRegistry;
 
 fn main() {
     let ocafile_path = "tests/assets/semantics/entrance_credential.ocafile";

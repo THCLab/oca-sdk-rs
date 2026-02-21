@@ -14,27 +14,27 @@ use std::collections::HashMap;
 use std::sync::{Arc, Mutex, Weak};
 mod data_validator;
 
-// --- External crates ---
-use lazy_static::lazy_static;
-
 // -- Re-exports all modules in consistant interface
 pub mod oca {
     pub mod utils {
         pub mod said {
-            pub use oca_bundle::state::oca_bundle::SelfAddressingIdentifier;
-            pub use oca_bundle::state::oca_bundle::HashFunctionCode;
-            pub use oca_bundle::state::oca_bundle::HashFunction;
             pub use oca_bundle::state::oca_bundle::error;
+            pub use oca_bundle::state::oca_bundle::HashFunction;
+            pub use oca_bundle::state::oca_bundle::HashFunctionCode;
+            pub use oca_bundle::state::oca_bundle::SelfAddressingIdentifier;
         }
     }
     pub mod bundle {
-        pub use oca_bundle::state::{oca_bundle::{
-            OCABundle, OCABundleModel,
-        }, validator::validate as validate_semantics};
-        pub use oca_bundle::state::validator::{SemanticValidationStatus, Validator as OCAValidator};
-        pub use oca_bundle::state::attribute::Attribute;
-        pub use oca_bundle::controller::load_oca as load;
         pub use oca_bundle::build::from_ast;
+        pub use oca_bundle::controller::load_oca as load;
+        pub use oca_bundle::state::attribute::Attribute;
+        pub use oca_bundle::state::validator::{
+            SemanticValidationStatus, Validator as OCAValidator,
+        };
+        pub use oca_bundle::state::{
+            oca_bundle::{OCABundle, OCABundleModel},
+            validator::validate as validate_semantics,
+        };
     }
     pub mod file {
         pub use oca_file::ocafile::*;

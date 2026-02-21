@@ -8,7 +8,8 @@ fn building_from_ocafile() -> Result<(), Box<dyn std::error::Error>> {
     assert!(ocafile_path.exists(), "Asset file not found!");
     let ocafile_str = fs::read_to_string(ocafile_path)?;
 
-    let overlay_registry = oca::overlay_file::OverlayLocalRegistry::from_dir("tests/assets/overlay-file/")?;
+    let overlay_registry =
+        oca::overlay_file::OverlayLocalRegistry::from_dir("tests/assets/overlay-file/")?;
 
     let oca_ast = oca::file::parse_from_string(ocafile_str, &overlay_registry)?;
 
@@ -38,7 +39,8 @@ fn validate_captured_data() -> Result<(), Box<dyn std::error::Error>> {
     let structural_bundle_str = fs::read_to_string(structural_bundle_path)?;
 
     println!(">>> {:?}", structural_bundle_str);
-    let overlay_registry = oca::overlay_file::OverlayLocalRegistry::from_dir("tests/assets/overlay-file/")?;
+    let overlay_registry =
+        oca::overlay_file::OverlayLocalRegistry::from_dir("tests/assets/overlay-file/")?;
     let mut structural_bundle =
         oca::bundle::load(&mut structural_bundle_str.as_bytes(), &overlay_registry).unwrap();
 
@@ -48,7 +50,8 @@ fn validate_captured_data() -> Result<(), Box<dyn std::error::Error>> {
         oca::bundle::SemanticValidationStatus::Valid
     ));
 
-    let data_validation_status = oca::validator::validate_data(&mut structural_bundle, &data).unwrap();
+    let data_validation_status =
+        oca::validator::validate_data(&mut structural_bundle, &data).unwrap();
     assert!(matches!(
         data_validation_status,
         oca::validator::DataValidationStatus::Invalid(_)
