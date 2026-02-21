@@ -1,4 +1,5 @@
 # OCA SDK
+
 Comprehensive SDK for OCA Bundle management and integration in Rust.
 
 This crate helps you:
@@ -6,8 +7,6 @@ This crate helps you:
 - build and validate OCA bundles,
 - validate captured data against bundles,
 - load/serialize bundles and overlays.
-
-For a step-by-step walkthrough with runnable commands, see `docs/quickstart.md`.
 
 ## Usage (library)
 
@@ -17,19 +16,56 @@ Add to your `Cargo.toml`:
 oca-sdk-rs = "2.0.0-rc.5"
 ```
 
-Then import what you need, for example:
+### Creating a Bundle from OCAFile
 
+```rust
+use oca_sdk_rs::oca::overlay_file::OverlayLocalRegistry;
+use oca_sdk_rs::oca::file::parse_from_string;
+use oca_sdk_rs::oca::bundle::from_ast;
+
+let overlay_registry = OverlayLocalRegistry::from_dir("path/to/overlay-files")?;
+let ocafile_str = std::fs::read_to_string("path/to/ocafile.ocafile")?;
+let oca_ast = parse_from_string(ocafile_str, &overlay_registry)?;
+let oca_bundle = from_ast(None, &oca_ast)?.oca_bundle;
 ```
-use oca_sdk_rs::{load, validate_semantics, OCABundleModel, SemanticValidationStatus};
+
+### Validating Bundle Semantics
+
+```rust
+use oca_sdk_rs::oca::bundle::{validate_semantics, SemanticValidationStatus};
+
+let status = validate_semantics(&oca_bundle)?;
+assert!(matches!(status, SemanticValidationStatus::Valid));
 ```
 
-For end-to-end runnable flows, use the examples (next section) and `docs/quickstart.md`.
+### Validating Captured Data
 
-## License
+```rust
+use oca_sdk_rs::oca::validator::validate_data;
 
-EUPL 1.2
+let data = serde_json::from_str(r#"{"field": "value"}"#)?;
+let validation_status = validate_data(&mut oca_bundle, &data)?;
+```
 
-We have distilled the most crucial license specifics to make your adoption seamless: [see here for details](https://github.com/THCLab/licensing).
+### Accessing Bundle Attributes
+
+```rust
+use oca_sdk_rs::oca::bundle::{OCABundleModel, WithInfo};
+
+let info = oca_bundle.model.info();
+for attr in info.attributes() {
+    println!("{:?}", attr);
+}
+```
+
+### Converting Bundle to JSON
+
+```rust
+use oca_sdk_rs::oca::bundle::{OCABundleModel, ToJSON};
+
+let json = oca_bundle.model.get_json_bundle();
+println!("{}", json);
+```
 
 ## Tests
 
@@ -57,3 +93,10 @@ Notes:
 - If you run from a different working directory, use absolute paths or `cargo run --example <name> -- <args>`.
 
 See `docs/quickstart.md` for a step-by-step walkthrough with expected inputs/outputs.
+
+## License
+
+EUPL 1.2
+
+We have distilled the most crucial license specifics to make your adoption seamless: [see here for details](https://github.com/THCLab/licensing).
+

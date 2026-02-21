@@ -8,79 +8,55 @@
 //! - Validate OCA Bundle semantics.
 //! - Validate data against OCA Bundle.
 //! - Traverse through OCA Bundle attributes.
-pub mod data_validator;
-pub use oca_ast::ast::{
-    recursive_attributes::NestedAttrTypeFrame, AttributeType, NestedAttrType, RefValue,
-};
 
-pub use oca_bundle::state::oca_bundle::OCABundle;
-pub use oca_bundle::state::oca_bundle::OCABundleModel;
-/// Performs semantic validation of an `OCABundle` and returns a status
-/// indicating whether the validation succeeded or failed, along with any associated errors.
-///
-/// Semantics validation ensures Bundle integrity, that is, that the Bundle identifier under `d`
-/// attribute matches the hash of the Bundle content.
-///
-/// # Arguments
-/// * `oca_bundle` - A reference to an `OCABundle` instance to be validated.
-///   The `OCABundle` contains the schema and data to be checked for semantic correctness.
-///
-/// # Returns
-/// * `Ok(SemanticValidationStatus::Valid)` - If the `OCABundle` passes all semantic validation checks.
-/// * `Ok(SemanticValidationStatus::Invalid(errors))` - If validation errors are found, with a vector of error messages.
-/// * `Err(String)` - If  a critical error occurs during validation.
-///
-/// # Errors
-/// * Returns `Err` with a string message if the validation process encounters unexpected errors.
-///
-/// # Examples
-/// ```
-/// use std::fs;
-/// use std::path::Path;
-/// use oca_sdk_rs::{load, validate_semantics, SemanticValidationStatus};
-/// use oca_sdk_rs::overlay_registry::OverlayLocalRegistry;
-///
-/// let structural_bundle_path = Path::new("tests/assets/semantics/structural_bundle2.json");
-/// let structural_bundle_str = fs::read_to_string(structural_bundle_path).expect("Failed to read the file");
-/// let overlay_registry = OverlayLocalRegistry::from_dir("tests/assets/overlay-file/").unwrap();
-/// let structural_bundle = load(&mut structural_bundle_str.as_bytes(), &overlay_registry).unwrap();
-///
-/// let semantics_validation_status = validate_semantics(&structural_bundle).unwrap();
-///
-/// match semantics_validation_status {
-///     SemanticValidationStatus::Valid => println!("The structural bundle is valid!"),
-///     SemanticValidationStatus::Invalid(errors) => {
-///         println!("Validation errors:");
-///         for error in errors {
-///             println!("  - {}", error);
-///         }
-///     }
-/// }
-/// ```
-pub use oca_bundle::state::validator::validate as validate_semantics;
-pub use oca_bundle::{
-    controller::load_oca as load,
-    state::{
-        attribute::Attribute,
-        validator::{SemanticValidationStatus, Validator as OCAValidator},
-    },
-};
+// --- Standard library imports ---
 use std::collections::HashMap;
 use std::sync::{Arc, Mutex, Weak};
+mod data_validator;
 
-pub use oca_bundle::state::oca_bundle::error as said_error;
-pub use oca_bundle::state::oca_bundle::SelfAddressingIdentifier;
-pub use oca_bundle::state::oca_bundle::{HashFunction, HashFunctionCode};
-pub use oca_file::ocafile;
-pub use overlay_file::overlay_registry;
+// --- External crates ---
+use lazy_static::lazy_static;
+
+// -- Re-exports all modules in consistant interface
+pub mod oca {
+    pub mod utils {
+        pub mod said {
+            pub use oca_bundle::state::oca_bundle::SelfAddressingIdentifier;
+            pub use oca_bundle::state::oca_bundle::HashFunctionCode;
+            pub use oca_bundle::state::oca_bundle::HashFunction;
+            pub use oca_bundle::state::oca_bundle::error;
+        }
+    }
+    pub mod bundle {
+        pub use oca_bundle::state::{oca_bundle::{
+            OCABundle, OCABundleModel,
+        }, validator::validate as validate_semantics};
+        pub use oca_bundle::state::validator::{SemanticValidationStatus, Validator as OCAValidator};
+        pub use oca_bundle::state::attribute::Attribute;
+        pub use oca_bundle::controller::load_oca as load;
+        pub use oca_bundle::build::from_ast;
+    }
+    pub mod file {
+        pub use oca_file::ocafile::*;
+    }
+    pub mod overlay_file {
+        pub use oca_ast::ast::{
+            recursive_attributes::NestedAttrTypeFrame, AttributeType, NestedAttrType, RefValue,
+        };
+        pub use overlay_file::overlay_registry::OverlayLocalRegistry;
+    }
+    pub mod validator {
+        pub use crate::data_validator::*;
+    }
+}
 
 pub trait ToJSON {
     fn get_json_bundle(&self) -> String;
 }
 
-impl ToJSON for OCABundleModel {
+impl ToJSON for oca::bundle::OCABundleModel {
     fn get_json_bundle(&self) -> String {
-        let oca_bundle = OCABundle::from(self.clone());
+        let oca_bundle = oca::bundle::OCABundle::from(self.clone());
         let result = serde_json::to_string_pretty(&oca_bundle);
         match result {
             Ok(json) => json,
@@ -97,9 +73,9 @@ pub trait WithInfo {
     fn info(&self) -> Arc<OCABundleInfo>;
 }
 
-impl WithInfo for OCABundleModel {
+impl WithInfo for oca::bundle::OCABundleModel {
     fn info(&self) -> Arc<OCABundleInfo> {
-        let key = self as *const OCABundleModel as usize;
+        let key = self as *const oca::bundle::OCABundleModel as usize;
         let mut cache = INFO_CACHE.lock().unwrap();
         if let Some(weak_info) = cache.get(&key) {
             if let Some(info) = weak_info.upgrade() {
@@ -115,12 +91,12 @@ impl WithInfo for OCABundleModel {
 
 pub struct OCABundleInfo {
     // TODO Find out if this should be option or not
-    attributes: Option<HashMap<String, Attribute>>,
+    attributes: Option<HashMap<String, oca::bundle::Attribute>>,
     pub meta: HashMap<String, HashMap<String, String>>,
 }
 
 impl OCABundleInfo {
-    pub fn new(bundle: &OCABundleModel) -> Self {
+    pub fn new(bundle: &oca::bundle::OCABundleModel) -> Self {
         let meta = HashMap::new();
         // TODO fix it
         // let oca_box = OCABox::from(bundle.clone());
@@ -136,11 +112,11 @@ impl OCABundleInfo {
         }
     }
 
-    pub fn attributes(&self) -> impl Iterator<Item = &Attribute> {
+    pub fn attributes(&self) -> impl Iterator<Item = &oca::bundle::Attribute> {
         self.attributes.as_ref().unwrap().values()
     }
 
-    pub fn attribute(&self, name: &str) -> Option<&Attribute> {
+    pub fn attribute(&self, name: &str) -> Option<&oca::bundle::Attribute> {
         self.attributes.as_ref().unwrap().get(name)
     }
 }

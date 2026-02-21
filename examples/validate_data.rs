@@ -1,12 +1,7 @@
 use std::fs;
 use std::path::Path;
 
-use oca_sdk_rs::{
-    data_validator::{validate_data, DataValidationStatus},
-    load,
-    overlay_registry::OverlayLocalRegistry,
-    validate_semantics, SemanticValidationStatus,
-};
+use oca_sdk_rs::oca;
 
 fn main() {
     let data_path = Path::new("tests/assets/data/nested_valid.json");
@@ -17,12 +12,12 @@ fn main() {
     let bundle_str = fs::read_to_string(bundle_path).expect("failed to read bundle");
 
     let registry =
-        OverlayLocalRegistry::from_dir("tests/assets/overlay-file/").expect("load overlays");
-    let mut bundle = load(&mut bundle_str.as_bytes(), &registry).expect("load bundle");
+        oca::overlay_file::OverlayLocalRegistry::from_dir("tests/assets/overlay-file/").expect("load overlays");
+    let mut bundle = oca::bundle::load(&mut bundle_str.as_bytes(), &registry).expect("load bundle");
 
-    match validate_semantics(&bundle).expect("validate semantics") {
-        SemanticValidationStatus::Valid => {}
-        SemanticValidationStatus::Invalid(errs) => {
+    match oca::bundle::validate_semantics(&bundle).expect("validate semantics") {
+        oca::bundle::SemanticValidationStatus::Valid => {}
+        oca::bundle::SemanticValidationStatus::Invalid(errs) => {
             eprintln!("Semantics validation failed:");
             for err in errs {
                 eprintln!("- {}", err);
@@ -31,10 +26,10 @@ fn main() {
         }
     }
 
-    let status = validate_data(&mut bundle, &data).expect("validate data");
+    let status = oca::validator::validate_data(&mut bundle, &data).expect("validate data");
     match status {
-        DataValidationStatus::Valid => println!("Data validation: valid"),
-        DataValidationStatus::Invalid(errs) => {
+        oca::validator::DataValidationStatus::Valid => println!("Data validation: valid"),
+        oca::validator::DataValidationStatus::Invalid(errs) => {
             eprintln!("Data validation failed:");
             for err in errs {
                 eprintln!("- {}", err);
