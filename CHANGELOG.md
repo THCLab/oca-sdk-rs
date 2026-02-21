@@ -2,12 +2,19 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.0.0-rc.7] - 2026-02-21
+
+### ⚙️ Miscellaneous Tasks
+
+- Remove unused import and run fmt
+
 ## [2.0.0-rc.6] - 2026-02-21
 
 ### ⚙️ Miscellaneous Tasks
 
 - Update README with instruction how to start
 - Simplify external interface
+- Release 2.0.0-rc.6 version
 
 ## [2.0.0-rc.5] - 2026-01-29
 
