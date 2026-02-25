@@ -824,9 +824,9 @@ dependencies = [
 
 [[package]]
 name = "overlay-file"
-version = "1.0.0-rc.6"
+version = "1.0.0-rc.8"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "e22e9aaf970301939302c14b08e67ff40d01ed139142ee77ded953199c0b509d"
+checksum = "5e62c3e344e24f5de4d0024c8020064984d474bdfe6fa292ea313158d5ea0d5b"
 dependencies = [
  "env_logger",
  "indexmap",
