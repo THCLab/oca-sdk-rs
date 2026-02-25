@@ -2,11 +2,19 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.0.0-rc.8] - 2026-02-25
+
+### ⚙️ Miscellaneous Tasks
+
+- Bump overlay-file crate
+- Refresh cargo lock
+
 ## [2.0.0-rc.7] - 2026-02-21
 
 ### ⚙️ Miscellaneous Tasks
 
 - Remove unused import and run fmt
+- Release 2.0.0-rc.7 version
 
 ## [2.0.0-rc.6] - 2026-02-21
 
