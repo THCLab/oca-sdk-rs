@@ -715,9 +715,9 @@ dependencies = [
 
 [[package]]
 name = "oca-ast"
-version = "2.0.0-rc.5"
+version = "2.0.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "6b348a1bb11feedbc12c3c2b6f6779e251e3bb2a82c7c14599d7d95535170054"
+checksum = "8b99c4c9d9786ad83c27e28fa22cfb2c4ab2d5766ca46782ee9fb066fe004d4b"
 dependencies = [
  "env_logger",
  "indexmap",
@@ -738,9 +738,9 @@ dependencies = [
 
 [[package]]
 name = "oca-bundle"
-version = "2.0.0-rc.7"
+version = "2.0.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "77d1cad3c863bf818276a3c86580d2288173248a375f5fef469bbd94dd8cde31"
+checksum = "8bf9af31a9bdafd8410ef41d4bafc13c137c56b102cb0dba21cb9d4ef8f72dc4"
 dependencies = [
  "cascade",
  "convert_case",
@@ -772,9 +772,9 @@ dependencies = [
 
 [[package]]
 name = "oca-file"
-version = "2.0.0-rc.6"
+version = "2.0.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "4c28f191e1c488ec07b7486b862aa4daeb23dd29add0feb6ed46674d0b6fd836"
+checksum = "2ee2f1f3e75a3e64e6e41b434b0aaddc5b82c5457ee4e9f0f21a5efeedeb5f8b"
 dependencies = [
  "clap",
  "convert_case",
@@ -824,9 +824,9 @@ dependencies = [
 
 [[package]]
 name = "overlay-file"
-version = "1.0.0-rc.8"
+version = "1.0.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "5e62c3e344e24f5de4d0024c8020064984d474bdfe6fa292ea313158d5ea0d5b"
+checksum = "f247fec58c2b0449d14eecc0f1f61f11d7298e1f4e1d74f70d06c6a95908744e"
 dependencies = [
  "env_logger",
  "indexmap",
