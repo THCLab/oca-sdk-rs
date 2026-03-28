@@ -6,6 +6,7 @@
 //!
 //! - Create OCA Bundle from OCAFile.
 //! - Validate OCA Bundle semantics.
+//! - Validate OCA Bundle integrity (digests, references, overlay conformance).
 //! - Validate data against OCA Bundle.
 //! - Traverse through OCA Bundle attributes.
 
@@ -27,6 +28,9 @@ pub mod oca {
     pub mod bundle {
         pub use oca_bundle::build::from_ast;
         pub use oca_bundle::controller::load_oca as load;
+        pub use oca_bundle::controller::{
+            validate_bundle, BundleValidationResult, ValidationIssue, ValidationSeverity,
+        };
         pub use oca_bundle::state::attribute::Attribute;
         pub use oca_bundle::state::validator::{
             SemanticValidationStatus, Validator as OCAValidator,
