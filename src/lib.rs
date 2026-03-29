@@ -19,10 +19,9 @@ mod data_validator;
 pub mod oca {
     pub mod utils {
         pub mod said {
-            pub use oca_bundle::state::oca_bundle::error;
-            pub use oca_bundle::state::oca_bundle::HashFunction;
-            pub use oca_bundle::state::oca_bundle::HashFunctionCode;
-            pub use oca_bundle::state::oca_bundle::SelfAddressingIdentifier;
+            pub use said::derivation::{HashFunction, HashFunctionCode};
+            pub use said::error;
+            pub use said::SelfAddressingIdentifier;
         }
     }
     pub mod bundle {
