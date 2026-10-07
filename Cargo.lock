@@ -792,11 +792,13 @@ dependencies = [
 name = "oca-sdk-rs"
 version = "2.0.0"
 dependencies = [
+ "indexmap",
  "lazy_static",
  "oca-ast",
  "oca-bundle",
  "oca-file",
  "overlay-file",
+ "regex",
  "said",
  "serde",
  "serde_json",

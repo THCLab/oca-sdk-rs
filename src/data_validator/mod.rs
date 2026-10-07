@@ -18,6 +18,10 @@ pub enum DataValidationStatus {
 
 /// Validates the provided data against the schema defined in the `OCABundle`.
 ///
+/// Checks only the types of top-level primitive attributes: arrays, nested
+/// bundles, conformance and entry codes are not checked. Use
+/// [`crate::validation::Validator`] for full validation.
+///
 /// This function checks if the structure and attributes of the input `data` conform
 /// to the semantics specified in the `OCABundle`. It performs validations
 /// for each attribute and aggregates any errors found.

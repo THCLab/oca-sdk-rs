@@ -1,0 +1,24 @@
+{
+  "v": "OCAS02JSON0001ba_",
+  "digest": "EJIihyOZjx7cL68jplpwoORHp6WIU10e1N5RpyVlJDTI",
+  "capture_base": {
+    "digest": "ELxoNQWmpQPbXXfX2wEndnKvGzeRzRMbVyflV_omu7OX",
+    "type": "capture_base/2.0.0",
+    "attributes": {
+      "children": [
+        "Text"
+      ],
+      "label": "Text"
+    }
+  },
+  "overlays": [
+    {
+      "digest": "EKqBC8aePMqsPeiO2p3Ei2IEPWAjAG-nKaDMoBpJglg6",
+      "capture_base": "ELxoNQWmpQPbXXfX2wEndnKvGzeRzRMbVyflV_omu7OX",
+      "type": "overlay/hcf:recursive/1.0.0",
+      "attribute_recursions": {
+        "children": "8"
+      }
+    }
+  ]
+}

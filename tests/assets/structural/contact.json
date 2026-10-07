@@ -1,0 +1,56 @@
+{
+  "v": "OCAS02JSON00047e_",
+  "digest": "EIleFjixuVSYTe_KmV0X8MeNpCajG5ufdgJIuwa07660",
+  "capture_base": {
+    "digest": "EEP2X1jVMo9Om-Jd2JImyyVfBgsHhr7OpoiVYM7sAjNh",
+    "type": "capture_base/2.0.0",
+    "attributes": {
+      "born": "DateTime",
+      "email": "Text",
+      "kind": "Text",
+      "name": "Text",
+      "pet": "refs:EADGOXqtIKSr9JfdB0Thee0XoilodZ_Q8sAQypZfrWIy",
+      "tags": [
+        "Text"
+      ]
+    }
+  },
+  "overlays": [
+    {
+      "digest": "EKsvCp2dfb-wLvHahLyVlaZIjueWsG1wSLOw3IsuP5g8",
+      "capture_base": "EEP2X1jVMo9Om-Jd2JImyyVfBgsHhr7OpoiVYM7sAjNh",
+      "type": "overlay/conformance/2.0.0",
+      "attribute_conformances": {
+        "name": "M",
+        "email": "O"
+      }
+    },
+    {
+      "digest": "EAbXDBHx5CXvRADRcP56bY4sGxp2K_jP7kKI5iuW5DI0",
+      "capture_base": "EEP2X1jVMo9Om-Jd2JImyyVfBgsHhr7OpoiVYM7sAjNh",
+      "type": "overlay/entry_code/2.0.0",
+      "attribute_entry_codes": {
+        "kind": [
+          "person",
+          "company"
+        ]
+      }
+    },
+    {
+      "digest": "EKamSnOMD0T3LHdO44bpfWEtDDu6AlTCdA7nxCjaReSA",
+      "capture_base": "EEP2X1jVMo9Om-Jd2JImyyVfBgsHhr7OpoiVYM7sAjNh",
+      "type": "overlay/format/2.0.0",
+      "attribute_formats": {
+        "email": "[^@ ]+@[^@ ]+"
+      }
+    },
+    {
+      "digest": "EGkoAYNZz5Q0l2aZEeEAKRS9E4NiJ9R7ATZ3BJp7nz90",
+      "capture_base": "EEP2X1jVMo9Om-Jd2JImyyVfBgsHhr7OpoiVYM7sAjNh",
+      "type": "overlay/cardinality/2.0.0",
+      "attribute_cardinalities": {
+        "tags": "1-3"
+      }
+    }
+  ]
+}

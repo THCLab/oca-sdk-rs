@@ -1,0 +1,21 @@
+{
+  "v": "OCAS02JSON0001c6_",
+  "digest": "EA3ASdWIgdYDGmaqlxdrcgC1kMOaruvRxI9QfRQEO3d-",
+  "capture_base": {
+    "digest": "EPqy7DCXwvRQuuA5xUQdV_2unfmwVM_fzntpEHaglFiH",
+    "type": "capture_base/2.0.0",
+    "attributes": {
+      "body": "Text"
+    }
+  },
+  "overlays": [
+    {
+      "digest": "EKiT1pAT45a9Wrh2vB9hGjU4pMoLxqdo5-yeesTMj0US",
+      "capture_base": "EPqy7DCXwvRQuuA5xUQdV_2unfmwVM_fzntpEHaglFiH",
+      "type": "overlay/hcf:json/1.0.0",
+      "attribute_json": {
+        "body": "refs:EGBscZkXFEVDVaGG2SQ6bnVmNSlD2aNd9f6Q3d9vcvoh"
+      }
+    }
+  ]
+}

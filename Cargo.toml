@@ -7,11 +7,13 @@ readme = "README.md"
 description = "Comprehensive SDK for OCA Bundle management and integration"
 
 [dependencies]
+indexmap = "2.12.0"
 lazy_static = "1.5.0"
 oca-ast = { version = "2.0.0" }
 oca-bundle = { version = "2.0.0" }
 oca-file = { version = "2.0.0" }
 overlay-file = { version = "1.0.0" }
+regex = "1.11"
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
 said = { version = "0.5.2" }

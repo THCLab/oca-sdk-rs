@@ -1,0 +1,54 @@
+{
+  "v": "OCAS02JSON000473_",
+  "digest": "ENZxSAJayzU5QG-DtzRz50clFb3JmPcKM3K10jxsvriZ",
+  "capture_base": {
+    "digest": "EEv5QRpJNDIJnuQmG1fAzCukgnOCzwK-meM6A0wDCSll",
+    "type": "capture_base/2.0.0",
+    "attributes": {
+      "code": "Text",
+      "discount": "Text",
+      "extra": "Text",
+      "items": [
+        "Text"
+      ],
+      "labels": "Text",
+      "payload": "Text",
+      "quantity": "Numeric"
+    }
+  },
+  "overlays": [
+    {
+      "digest": "EBmdNrfSubnykj9mw3Di8sA2C8JW1do88d8MoVBUXgGQ",
+      "capture_base": "EEv5QRpJNDIJnuQmG1fAzCukgnOCzwK-meM6A0wDCSll",
+      "type": "overlay/hcf:range/1.0.0",
+      "attribute_ranges": {
+        "quantity": "1..100",
+        "discount": "0..0.5"
+      }
+    },
+    {
+      "digest": "EHTQ0qxerI7Or7RE9SXUuI-wlh2pi_66pWL-wt_ALavg",
+      "capture_base": "EEv5QRpJNDIJnuQmG1fAzCukgnOCzwK-meM6A0wDCSll",
+      "type": "overlay/hcf:length/1.0.0",
+      "attribute_lengths": {
+        "code": "1..12"
+      }
+    },
+    {
+      "digest": "EBQT4JPB6HMjTJdDLe_D7KhDZPKaTM6_Mhwh3ef6l-tN",
+      "capture_base": "EEv5QRpJNDIJnuQmG1fAzCukgnOCzwK-meM6A0wDCSll",
+      "type": "overlay/hcf:map/1.0.0",
+      "attribute_maps": {
+        "labels": "^[a-z][a-z0-9-]{0,31}$"
+      }
+    },
+    {
+      "digest": "EBkSzTHGbu9Pny68fUig9zck-EQn4MlxzbA3LurWeE6y",
+      "capture_base": "EEv5QRpJNDIJnuQmG1fAzCukgnOCzwK-meM6A0wDCSll",
+      "type": "overlay/hcf:union/1.0.0",
+      "attribute_unions": {
+        "extra": "Text|Numeric|Null"
+      }
+    }
+  ]
+}

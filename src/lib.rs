@@ -7,13 +7,15 @@
 //! - Create OCA Bundle from OCAFile.
 //! - Validate OCA Bundle semantics.
 //! - Validate OCA Bundle integrity (digests, references, overlay conformance).
-//! - Validate data against OCA Bundle.
+//! - Validate data against OCA Bundles, nested bundles and structural
+//!   overlays included ([`validation`]).
 //! - Traverse through OCA Bundle attributes.
 
 // --- Standard library imports ---
 use std::collections::HashMap;
 use std::sync::{Arc, Mutex, Weak};
 mod data_validator;
+pub mod validation;
 
 // -- Re-exports all modules in consistant interface
 pub mod oca {
@@ -48,8 +50,13 @@ pub mod oca {
         };
         pub use overlay_file::overlay_registry::OverlayLocalRegistry;
     }
+    /// Shallow, top-level type checks. Superseded by [`crate::validation`].
     pub mod validator {
         pub use crate::data_validator::*;
+    }
+    /// Validation of data against bundles; see [`crate::validation`].
+    pub mod data {
+        pub use crate::validation::*;
     }
 }
 

@@ -1,0 +1,14 @@
+{
+  "v": "OCAS02JSON000102_",
+  "digest": "ELghQ4mGf5N0Y1O0V4Hp-FCHRGmK-GFD41mQ1cJkYWrq",
+  "capture_base": {
+    "digest": "EPK7HWeg6TLggIAIg-u4w7T8nJM8DI1ass0a7ZUlfhmy",
+    "type": "capture_base/2.0.0",
+    "attributes": {
+      "indoor": "Boolean",
+      "kind": "Text",
+      "name": "Text"
+    }
+  },
+  "overlays": []
+}

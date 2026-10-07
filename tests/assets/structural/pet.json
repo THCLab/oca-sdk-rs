@@ -1,0 +1,35 @@
+{
+  "v": "OCAS02JSON0002ea_",
+  "digest": "EADGOXqtIKSr9JfdB0Thee0XoilodZ_Q8sAQypZfrWIy",
+  "capture_base": {
+    "digest": "EGyrjNZ3ZXpACmoINtsJlyv_sc88SgbsFlKW5_JL9Szh",
+    "type": "capture_base/2.0.0",
+    "attributes": {
+      "kind": "Text",
+      "name": "Text"
+    }
+  },
+  "overlays": [
+    {
+      "digest": "EGF0JTHT7GIXDyWe-3HZeI6iqxr3b8OYdAmShh2-2iRa",
+      "capture_base": "EGyrjNZ3ZXpACmoINtsJlyv_sc88SgbsFlKW5_JL9Szh",
+      "type": "overlay/entry_code/2.0.0",
+      "attribute_entry_codes": {
+        "kind": [
+          "cat",
+          "dog"
+        ]
+      }
+    },
+    {
+      "digest": "EMOBPsjqkaxz3pZFCQWkOD1g3WJGvFxJ-chDYA3q4sk0",
+      "capture_base": "EGyrjNZ3ZXpACmoINtsJlyv_sc88SgbsFlKW5_JL9Szh",
+      "type": "overlay/hcf:variant/1.0.0",
+      "discriminator": "kind",
+      "variants": {
+        "cat": "refs:ELghQ4mGf5N0Y1O0V4Hp-FCHRGmK-GFD41mQ1cJkYWrq",
+        "dog": "refs:EGBscZkXFEVDVaGG2SQ6bnVmNSlD2aNd9f6Q3d9vcvoh"
+      }
+    }
+  ]
+}
