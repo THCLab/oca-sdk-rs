@@ -27,7 +27,9 @@ use std::collections::HashMap;
 use std::fmt;
 use std::str::FromStr;
 
-use oca_ast::ast::{AttributeType, NestedAttrType, NestedValue, RefValue};
+use oca_ast::ast::{AttributeType, NestedAttrType, RefValue};
+/// Values of overlay properties, as [`overlay`] returns them.
+pub use oca_ast::ast::NestedValue;
 use oca_bundle::state::oca_bundle::OCABundleModel;
 use overlay_file::overlay_registry::OverlayLocalRegistry;
 use regex::Regex;
